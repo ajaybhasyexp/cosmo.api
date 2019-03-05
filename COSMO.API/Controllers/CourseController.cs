@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using COSMO.Business.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using COSMO.Models.Models;
 
 namespace COSMO.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CourseController : ControllerBase
@@ -40,11 +42,22 @@ namespace COSMO.API.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         public ResponseDto<Course> Get(int id)
         {
             ResponseDto<Course> response = new ResponseDto<Course>
             {
                 Data = _courseService.Get(id)
+            };
+            return response;
+        }
+
+        [HttpPost]
+        public ResponseDto<Course> Save([FromBody] Course course)
+        {
+            ResponseDto<Course> response = new ResponseDto<Course>
+            {
+                Data = _courseService.Save(course)
             };
             return response;
         }

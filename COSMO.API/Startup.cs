@@ -32,6 +32,8 @@ namespace COSMO.API
             services.AddTransient<ITempleRepository, TempleRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IBranchRepository, BranchRepository>();
+            services.AddTransient<ICourseRepository, CourseRepository>();
+            
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBranchService, BranchService>();
             services.AddTransient<ICourseService, CourseService>();
