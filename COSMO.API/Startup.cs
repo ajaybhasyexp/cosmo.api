@@ -31,7 +31,10 @@ namespace COSMO.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<ITempleRepository, TempleRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IBranchRepository, BranchRepository>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IBranchService, BranchService>();
+            services.AddTransient<ICourseService, CourseService>();
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");

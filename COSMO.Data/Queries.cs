@@ -9,7 +9,7 @@
 
         public static readonly string GetUserByUname = "Select * from `User` where UserName = '{0}' AND Password = '{1}'";
 
-        public static readonly string Branch_Save = "INSERT INTO `branch`(`BranchName`,`BranchAddress`,`ContactPerson`,`ContactNumber`,`AlternativeContact`) VALUES ('{0}','{1}','{2}','{3}','{4}');";
+        public static readonly string Branch_Save = "INSERT INTO `branch`(`BranchName`,`BranchAddress`,`ContactPerson`,`ContactNumber`,`BranchEmail`,`AdminId`,`CreatedDate`,`UpdatedDate`) VALUES ('{0}','{1}','{2}','{3}','{4}',{5},NOW(),NOW());";
 
     }
 }

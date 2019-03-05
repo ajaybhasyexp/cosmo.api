@@ -9,8 +9,13 @@ using System.Linq;
 
 namespace COSMO.Data.Repositories
 {
-    public class BranchRepository : IBranchRepository
+    /// <summary>
+    /// The repository and methods for course entity.
+    /// </summary>
+    public class CourseRepository : ICourseRepository
     {
+        #region Private Members
+
         /// <summary>
         /// The configuration.
         /// </summary>
@@ -20,7 +25,7 @@ namespace COSMO.Data.Repositories
         /// THe constuctor that also contains the injected dependencies.
         /// </summary>
         /// <param name="config"></param>
-        public BranchRepository(IConfiguration config)
+        public CourseRepository(IConfiguration config)
         {
             _config = config;
         }
@@ -36,54 +41,46 @@ namespace COSMO.Data.Repositories
             }
         }
 
-        #region Public Methods
-
         /// <summary>
-        /// Gets the branch entity based on id.
+        /// Gets all the course entries in db.
         /// </summary>
-        /// <param name="id">The id to get the branch entity.</param>
-        /// <returns>A single branch entity.</returns>
-        public Branch Get(int id)
+        /// <returns></returns>
+        public List<Course> GetAll()
         {
             using (var conn = Connection)
             {
                 conn.Open();
-                return conn.Get<Branch>(id);
+                return conn.GetAll<Course>().ToList();
+            }
+        }
+
+        
+        public Course Get(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                return conn.Get<Course>(id);
             }
         }
 
         /// <summary>
-        /// Gets all the branch entities.
+        /// Saves the course entity or updates it.
         /// </summary>
-        /// <returns>A list of branch entity.</returns>
-        public List<Branch> GetAll()
+        /// <param name="course">The course entity to update.</param>
+        /// <returns>The saved or updated entity.</returns>
+        public Course Save(Course course)
         {
             using (var conn = Connection)
             {
                 conn.Open();
-                return conn.GetAll<Branch>().ToList();
-            }
-        }
-
-        /// <summary>
-        /// Saves the branch entity.
-        /// </summary>
-        /// <param name="branch">Entity to save.</param>
-        /// <returns>The saved entity.</returns>
-        public Branch Save(Branch branch)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                if (branch.BranchId == 0)
-                {
-                    conn.Insert(branch);
-                }
+                if (course.CourseId == 0)
+                    conn.Insert(course);
                 else
-                    conn.Update(branch);
-                return branch;
+                    conn.Update(course);
+                return course;
             }
-        }        
+        }
 
         #endregion
     }

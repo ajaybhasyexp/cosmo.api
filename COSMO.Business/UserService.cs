@@ -1,30 +1,52 @@
 ﻿using COSMO.Business.Abstractions;
 using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Common;
+using COSMO.Models.UserModule;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using COSMO.Models.UserModule;
 
 namespace COSMO.Business
 {
+    /// <summary>
+    /// The user service.
+    /// </summary>
     public class UserService : IUserService
     {
+        #region Private members
 
-        public IUserRepository _userRepository { get; set; }
+        /// <summary>
+        /// The repository for user related data methods.
+        /// </summary>
+        private IUserRepository _userRepository { get; set; }
 
+        /// <summary>
+        /// The app settings object.
+        /// </summary>
         private readonly AppSettings _appSettings;
 
+        #endregion
 
+        /// <summary>
+        /// Constructor for user service.
+        /// </summary>
+        /// <param name="userRepository">User repository to inject.</param>
+        /// <param name="appSettings">The app setting to inject.</param>
         public UserService(IUserRepository userRepository, IOptions<AppSettings> appSettings)
         {
             _userRepository = userRepository;
             _appSettings = appSettings.Value;
         }
 
+        /// <summary>
+        /// The authenticate method to validate user and issue claims.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>The user object with token.</returns>
         public User Authenticate(string username, string password)
         {
             var user = _userRepository.GetUser(username, password).Result;
