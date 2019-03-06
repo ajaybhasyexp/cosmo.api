@@ -33,13 +33,17 @@ namespace COSMO.Data.Repositories
         /// <summary>
         /// The common property to get connection.
         /// </summary>
-        public IDbConnection Connection
+        private IDbConnection Connection
         {
             get
             {
                 return new MySqlConnection(_config.GetConnectionString("COSMODev"));
             }
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Gets all the course entries in db.
@@ -54,7 +58,7 @@ namespace COSMO.Data.Repositories
             }
         }
 
-        
+
         public Course Get(int id)
         {
             using (var conn = Connection)

@@ -1,5 +1,5 @@
-﻿using COSMO.Business.Abstractions;
-using COSMO.Business;
+﻿using COSMO.Business;
+using COSMO.Business.Abstractions;
 using COSMO.Data.Abstractions.Repositories;
 using COSMO.Data.Repositories;
 using COSMO.Models.Common;
@@ -10,9 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Swashbuckle.AspNetCore.Swagger;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace COSMO.API
 {
@@ -29,7 +28,6 @@ namespace COSMO.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddTransient<ITempleRepository, TempleRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IBranchRepository, BranchRepository>();
             services.AddTransient<ICourseRepository, CourseRepository>();
