@@ -6,17 +6,17 @@ using System.Collections.Generic;
 
 namespace COSMO.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class BranchController : ControllerBase
+    [Authorize]
+    public class BatchController : ControllerBase
     {
         #region Private members
 
         /// <summary>
         /// The branch service for busines methods.
         /// </summary>
-        private IBranchService _branchServive { get; set; }
+        private IBatchService _batchService { get; set; }
 
         #endregion
 
@@ -24,22 +24,21 @@ namespace COSMO.API.Controllers
         /// Constructor for injection.
         /// </summary>
         /// <param name="branchServive">The branch service to inject.</param>
-        public BranchController(IBranchService branchServive)
+        public BatchController(IBatchService batchService)
         {
-            _branchServive = branchServive;
+            _batchService = batchService;
         }
-        
 
         /// <summary>
         /// Gets all the branch entities.
         /// </summary>
         /// <returns>A list of branch entity.</returns>
         [HttpGet]
-        public ResponseDto<List<Branch>> GetAll()
+        public ResponseDto<List<Batch>> GetAll()
         {
-            ResponseDto<List<Branch>> response = new ResponseDto<List<Branch>>
+            ResponseDto<List<Batch>> response = new ResponseDto<List<Batch>>
             {
-                Data = _branchServive.GetAll()
+                Data = _batchService.GetAll()
             };
             return response;
         }
@@ -51,11 +50,11 @@ namespace COSMO.API.Controllers
         /// <returns>A branch entity.</returns>
         [HttpGet]
         [Route("{id}")]
-        public ResponseDto<Branch> Get([FromRoute] int id)
+        public ResponseDto<Batch> Get([FromRoute] int id)
         {
-            ResponseDto<Branch> response = new ResponseDto<Branch>
+            ResponseDto<Batch> response = new ResponseDto<Batch>
             {
-                Data = _branchServive.Get(id)
+                Data = _batchService.Get(id)
             };
             return response;
         }
@@ -66,10 +65,11 @@ namespace COSMO.API.Controllers
         /// <param name="branch"></param>
         /// <returns>A saved or updated branch entity.</returns>
         [HttpPost]
-        public ResponseDto<Branch> Save([FromBody]Branch branch)
+        [AllowAnonymous]
+        public ResponseDto<Batch> Save([FromBody]Batch branch)
         {
-            ResponseDto<Branch> response = new ResponseDto<Branch>();
-            response.Data = _branchServive.Save(branch);
+            ResponseDto<Batch> response = new ResponseDto<Batch>();
+            response.Data = _batchService.Save(branch);
             return response;
         }
     }

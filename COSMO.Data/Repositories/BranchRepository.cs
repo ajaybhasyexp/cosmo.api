@@ -11,10 +11,25 @@ namespace COSMO.Data.Repositories
 {
     public class BranchRepository : IBranchRepository
     {
+        #region Private Members
+
         /// <summary>
         /// The configuration.
         /// </summary>
         private readonly IConfiguration _config;
+
+        /// <summary>
+        /// The common property to get connection.
+        /// </summary>
+        private IDbConnection Connection
+        {
+            get
+            {
+                return new MySqlConnection(_config.GetConnectionString("COSMODev"));
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// THe constuctor that also contains the injected dependencies.
@@ -24,17 +39,7 @@ namespace COSMO.Data.Repositories
         {
             _config = config;
         }
-
-        /// <summary>
-        /// The common property to get connection.
-        /// </summary>
-        public IDbConnection Connection
-        {
-            get
-            {
-                return new MySqlConnection(_config.GetConnectionString("COSMODev"));
-            }
-        }
+        
 
         #region Public Methods
 
