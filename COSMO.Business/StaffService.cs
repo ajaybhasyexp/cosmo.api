@@ -3,7 +3,6 @@ using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace COSMO.Business
 {
@@ -16,11 +15,14 @@ namespace COSMO.Business
         /// </summary>
         public IStaffRepository _staffRepository { get; set; }
 
+        public IStaffRoleRepository _staffRoleRepository { get; set; }
+
         #endregion
 
-        public StaffService(IStaffRepository staffRepository)
+        public StaffService(IStaffRepository staffRepository, IStaffRoleRepository staffRoleRepository)
         {
             _staffRepository = staffRepository;
+            _staffRoleRepository = staffRoleRepository;
 
         }
 
@@ -36,22 +38,22 @@ namespace COSMO.Business
 
         public List<StaffRole> GetAllRoles()
         {
-            return _staffRepository.GetAllRoles();
+            return _staffRoleRepository.GetAll();
         }
 
         public StaffRole GetRole(int id)
         {
-            return _staffRepository.GetRole(id);
+            return _staffRoleRepository.Get(id);
         }
 
-        public Staff Save(Staff course)
+        public Staff Save(Staff staff)
         {
-            throw new NotImplementedException();
+            return _staffRepository.Save(staff);
         }
 
-        public StaffRole SaveRole(StaffRole course)
+        public StaffRole SaveRole(StaffRole staffRole)
         {
-            throw new NotImplementedException();
+            return _staffRoleRepository.Save(staffRole);
         }
     }
 }

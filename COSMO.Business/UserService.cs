@@ -49,7 +49,7 @@ namespace COSMO.Business
         /// <returns>The user object with token.</returns>
         public User Authenticate(string username, string password)
         {
-            var user = _userRepository.GetUser(username, password).Result;
+            var user = _userRepository.GetUser(username, password);
 
             // return null if user not found
             if (user == null)
@@ -62,7 +62,7 @@ namespace COSMO.Business
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.UserId.ToString()),
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
                     new Claim(ClaimTypes.GivenName,user.UserName)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),

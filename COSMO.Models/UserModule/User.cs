@@ -1,13 +1,12 @@
-﻿using System;
+﻿using COSMO.Models.Models;
 
 namespace COSMO.Models.UserModule
 {
     /// <summary>
     /// The user entity.
     /// </summary>
-    public class User
+    public class User : Base
     {
-        public int UserId { get; set; }
 
         public string Email { get; set; }
 
@@ -21,8 +20,5 @@ namespace COSMO.Models.UserModule
 
         public int UserRoleId { get; set; }
 
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime UpdatedDate { get; set; }
     }
 }

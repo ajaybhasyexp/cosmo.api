@@ -5,12 +5,8 @@ using System.Text;
 
 namespace COSMO.Data.Abstractions.Repositories
 {
-    public interface ICourseRepository
+    public interface ICourseRepository : IGenericRepository<Course>
     {
-        Course Save(Course course);
-
-        List<Course> GetAll();
-
-        Course Get(int id);
+        
     }
 }

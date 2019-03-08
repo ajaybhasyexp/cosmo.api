@@ -5,14 +5,13 @@ using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace COSMO.Data.Repositories
 {
     /// <summary>
     /// THe user repository.
     /// </summary>
-    public class UserRepository : IUserRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
         /// <summary>
         /// The configuration.
@@ -24,6 +23,7 @@ namespace COSMO.Data.Repositories
         /// </summary>
         /// <param name="config"></param>
         public UserRepository(IConfiguration config)
+            : base(config)
         {
             _config = config;
         }
@@ -39,22 +39,6 @@ namespace COSMO.Data.Repositories
             }
         }
 
-        /// <summary>
-        /// Gets the user object by userId.
-        /// </summary>
-        /// <param name="userId">The user identification.</param>
-        /// <returns>A user entity.</returns>
-        public async Task<User> GetUser(int userId)
-        {
-            var sqlQuery = Queries.GetUserById;
-            sqlQuery = string.Format(sqlQuery, userId);
-            using (IDbConnection conn = Connection)
-            {
-                conn.Open();
-                var result = await conn.QueryAsync<User>(sqlQuery);
-                return result.FirstOrDefault();
-            }
-        }
 
         /// <summary>
         /// Gets the user using username and password
@@ -62,14 +46,14 @@ namespace COSMO.Data.Repositories
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public async Task<User> GetUser(string userName, string password)
+        public User GetUser(string userName, string password)
         {
             var sqlQuery = Queries.GetUserByUname;
             sqlQuery = string.Format(sqlQuery, userName, password);
             using (IDbConnection conn = Connection)
             {
                 conn.Open();
-                var result = await conn.QueryAsync<User>(sqlQuery);
+                var result = conn.Query<User>(sqlQuery);
                 return result.FirstOrDefault();
             }
         }
