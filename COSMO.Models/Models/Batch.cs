@@ -1,21 +1,8 @@
-﻿using Dapper.Contrib.Extensions;
-using System;
-
-namespace COSMO.Models.Models
+﻿namespace COSMO.Models.Models
 {
-    public class Batch
+    public class Batch : Base
     {
-        [Key]
-        public int BatchId { get; set; }
 
         public string BatchName { get; set; }
-
-        public int CreatedBy { get; set; }
-
-        public int UpdatedBy { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime UpdatedDate { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace COSMO.Models.UserModule
 
         public string Token { get; set; }
 
-        public int BranchId { get; set; }
+        public int? BranchId { get; set; }
 
         public int UserRoleId { get; set; }
 

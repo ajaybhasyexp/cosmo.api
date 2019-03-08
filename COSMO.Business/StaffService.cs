@@ -26,7 +26,7 @@ namespace COSMO.Business
 
         public Staff Get(int id)
         {
-            return _staffRepository.Get();
+            return _staffRepository.Get(id);
         }
 
         public List<Staff> GetAll()

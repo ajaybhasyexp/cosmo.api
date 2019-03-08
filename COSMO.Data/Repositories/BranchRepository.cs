@@ -80,7 +80,7 @@ namespace COSMO.Data.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
-                if (branch.BranchId == 0)
+                if (branch.Id == 0)
                 {
                     conn.Insert(branch);
                 }

@@ -78,7 +78,7 @@ namespace COSMO.Data.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
-                if (course.CourseId == 0)
+                if (course.Id == 0)
                     conn.Insert(course);
                 else
                     conn.Update(course);

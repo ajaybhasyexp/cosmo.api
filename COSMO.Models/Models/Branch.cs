@@ -2,10 +2,10 @@
 
 namespace COSMO.Models.Models
 {
-    public class Branch
+    public class Branch : Base
     {
-        [Key]
-        public int BranchId { get; set; }
+       // [Key]
+       // public int BranchId { get; set; }
 
         public string BranchName { get; set; }
 

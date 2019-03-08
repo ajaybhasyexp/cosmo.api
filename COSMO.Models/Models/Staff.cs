@@ -2,9 +2,9 @@
 
 namespace COSMO.Models.Models
 {
-    public class Staff
+    public class Staff: Base
     {
-        public int StaffId { get; set; }
+        //public int StaffId { get; set; }
 
         public int StaffRoleId { get; set; }
 
@@ -17,13 +17,6 @@ namespace COSMO.Models.Models
         public string Email { get; set; }
 
         public int BranchId { get; set; }
-
-        public int CreatedBy { get; set; }
-
-        public int UpdatedBy { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime UpdatedDate { get; set; }
+        
     }
 }

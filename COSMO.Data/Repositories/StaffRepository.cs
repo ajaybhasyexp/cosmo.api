@@ -88,7 +88,7 @@ namespace COSMO.Data.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
-                if (staff.StaffId == 0)
+                if (staff.Id == 0)
                     conn.Insert(staff);
                 else
                     conn.Update(staff);
@@ -106,7 +106,7 @@ namespace COSMO.Data.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
-                if (staffRole.StaffRoleId == 0)
+                if (staffRole.Id == 0)
                     conn.Insert(staffRole);
                 else
                     conn.Update(staffRole);

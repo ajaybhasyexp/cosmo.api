@@ -1,23 +1,10 @@
-﻿using Dapper.Contrib.Extensions;
-using System;
-
-namespace COSMO.Models.Models
+﻿namespace COSMO.Models.Models
 {
-    public class StaffRole
+    public class StaffRole : Base
     {
-        [Key]
-        public int StaffRoleId { get; set; }
-
         public string Role { get; set; }
 
         public string Description { get; set; }
 
-        public int CreatedBy { get; set; }
-
-        public int UpdatedBy { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime UpdatedDate { get; set; }
     }
 }
