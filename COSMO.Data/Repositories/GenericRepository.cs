@@ -2,6 +2,7 @@
 using Dapper.Contrib.Extensions;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -65,18 +66,24 @@ namespace COSMO.Data.Repositories
         /// </summary>
         /// <param name="branch">Entity to save.</param>
         /// <returns>The saved entity.</returns>
-        public T Save(T branch)
+        public T Save(T entity)
         {
             using (var conn = Connection)
             {
                 conn.Open();
-                if (branch.Id == 0)
+                if (entity.Id == 0)
                 {
-                    conn.Insert(branch);
+                    entity.CreatedDate = DateTime.Now;
+                    entity.UpdatedDate = DateTime.Now;
+                    conn.Insert(entity);
                 }
                 else
-                    conn.Update(branch);
-                return branch;
+                {
+                    entity.UpdatedDate = DateTime.Now;
+                    conn.Update(entity);
+                }
+                    
+                return entity;
             }
         }
 

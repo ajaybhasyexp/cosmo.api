@@ -32,11 +32,13 @@ namespace COSMO.API
             services.AddTransient<IBranchRepository, BranchRepository>();
             services.AddTransient<ICourseRepository, CourseRepository>();
             services.AddTransient<IBatchRepository, BatchRepository>();
+            services.AddTransient<IUserRoleRepository, UserRoleRespository>();
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBranchService, BranchService>();
             services.AddTransient<ICourseService, CourseService>();
             services.AddTransient<IBatchService, BatchService>();
+            services.AddTransient<IUserRoleService, UserRoleService>();
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -67,7 +69,8 @@ namespace COSMO.API
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateAudience = false,
+                    ValidateLifetime = true
                 };
 
             });

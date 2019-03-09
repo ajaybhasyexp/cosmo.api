@@ -13,9 +13,12 @@ namespace COSMO.API.Controllers
     {
         private IUserService _userService { get; set; }
 
-        public UserController(IUserService userService)
+        private IUserRoleService _userRoleService { get; set; }
+
+        public UserController(IUserService userService, IUserRoleService userRoleService)
         {
             _userService = userService;
+            _userRoleService = userRoleService;
         }
         
 
@@ -30,5 +33,21 @@ namespace COSMO.API.Controllers
 
             return Ok(user);
         }
+
+        [HttpGet("roles")]
+        public ResponseDto<List<UserRole>> GetUserRoles()
+        {
+            ResponseDto<List<UserRole>> response = new ResponseDto<List<UserRole>>
+            {
+                Data = _userRoleService.GetAll()
+            };
+            return response;
+        }
+
+        //[HttpGet("userendpoint")]
+        //public ResponseDto<User> GetTokenAttributes(string token)
+        //{
+
+        //}
     }
 }

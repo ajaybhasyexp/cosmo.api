@@ -7,7 +7,7 @@ namespace COSMO.Models.UserModule
     /// </summary>
     public class User : Base
     {
-
+        
         public string Email { get; set; }
 
         public string UserName { get; set; }
@@ -19,6 +19,10 @@ namespace COSMO.Models.UserModule
         public int? BranchId { get; set; }
 
         public int UserRoleId { get; set; }
+
+        public string Role { get; set; }
+
+        public int UserId { get; set; }
 
     }
 }
