@@ -24,5 +24,7 @@ namespace COSMO.Business.Abstractions
         List<Course> GetAll();
 
         Course Get(int id);
+
+        void Delete(Course course);
     }
 }

@@ -65,7 +65,6 @@ namespace COSMO.API
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
-
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,

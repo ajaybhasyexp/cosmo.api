@@ -15,7 +15,7 @@ namespace COSMO.API.Controllers
     [ApiController]
     public class CourseController : ControllerBase
     {
-         #region Private members
+        #region Private members
 
         /// <summary>
         /// The course service for busines methods.
@@ -59,6 +59,22 @@ namespace COSMO.API.Controllers
             {
                 Data = _courseService.Save(course)
             };
+            return response;
+        }
+
+        [HttpDelete]
+        public ResponseDto<bool> Delete([FromBody] Course course)
+        {
+            ResponseDto<bool> response = new ResponseDto<bool>();
+            try
+            {
+                _courseService.Delete(course);
+               response.Data = true;
+            }
+            catch (Exception ex)
+            {
+                response.Data = false;
+            }
             return response;
         }
 

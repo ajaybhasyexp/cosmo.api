@@ -54,6 +54,11 @@ namespace COSMO.Business
             return _courseRepository.Save(course);
         }
 
+        public void Delete(Course course)
+        {
+            _courseRepository.Delete(course);
+        }
+
         #endregion
     }
 }

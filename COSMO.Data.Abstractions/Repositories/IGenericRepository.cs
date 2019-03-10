@@ -11,6 +11,8 @@ namespace COSMO.Data.Abstractions.Repositories
 
         List<T> GetAll();
 
-        T Save(T branch);
+        T Save(T entity);
+
+        void Delete(T entity);
     }
 }

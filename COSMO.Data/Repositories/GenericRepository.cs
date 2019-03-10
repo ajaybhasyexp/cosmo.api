@@ -87,6 +87,15 @@ namespace COSMO.Data.Repositories
             }
         }
 
+        public void Delete(T entity)
+        {
+            using (var conn = Connection)
+            {
+                 conn.Open();
+                 Delete(entity);
+            } 
+        }
+
         #endregion
     }
 }
