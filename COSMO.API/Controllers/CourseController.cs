@@ -62,6 +62,11 @@ namespace COSMO.API.Controllers
             return response;
         }
 
+        /// <summary>
+        /// The delete api method for course entity.
+        /// </summary>
+        /// <param name="course">The course entity.</param>
+        /// <returns>A standard response object.</returns>
         [HttpDelete]
         public ResponseDto<bool> Delete([FromBody] Course course)
         {

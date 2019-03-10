@@ -92,7 +92,7 @@ namespace COSMO.Data.Repositories
             using (var conn = Connection)
             {
                  conn.Open();
-                 Delete(entity);
+                conn.Delete(entity);
             } 
         }
 
