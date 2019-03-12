@@ -72,5 +72,26 @@ namespace COSMO.API.Controllers
             response.Data = _branchServive.Save(branch);
             return response;
         }
+
+        /// <summary>
+        /// Deletes the branch entity.
+        /// </summary>
+        /// <param name="branch">The entity to delete.</param>
+        [HttpDelete]
+        public ResponseDto<bool> Delete([FromBody] Branch branch)
+        {
+            ResponseDto<bool> response = new ResponseDto<bool>();
+            try
+            {
+                _branchServive.Delete(branch);
+                response.Data = true;
+                
+            }
+            catch
+            {
+                response.Data = false;
+            }
+            return response;
+        }
     }
 }

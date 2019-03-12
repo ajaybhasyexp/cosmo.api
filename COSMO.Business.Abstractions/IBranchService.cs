@@ -27,5 +27,11 @@ namespace COSMO.Business.Abstractions
         /// <param name="id">The id to get the branch.</param>
         /// <returns>A branch entity</returns>
         Branch Get(int id);
+
+        /// <summary>
+        /// Deletes the branch entity.
+        /// </summary>
+        /// <param name="branch">The entity to delete.</param>
+        void Delete(Branch branch);
     }
 }

@@ -57,6 +57,15 @@ namespace COSMO.Business
             return _branchRepository.Save(branch);
         }
 
+        /// <summary>
+        /// Deletes the branch entity.
+        /// </summary>
+        /// <param name="branch">The entity to delete.</param>
+        public void Delete(Branch branch)
+        {
+            _branchRepository.Delete(branch);
+        }
+
         #endregion
     }
 }
