@@ -22,6 +22,6 @@ namespace COSMO.Business.Abstractions
         /// <returns>A user entity.</returns>
         User Get(int id);
 
-        bool Delete(User user);
+        void Delete(User user);
     }
 }
