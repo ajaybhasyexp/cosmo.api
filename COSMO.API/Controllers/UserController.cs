@@ -20,7 +20,7 @@ namespace COSMO.API.Controllers
             _userService = userService;
             _userRoleService = userRoleService;
         }
-        
+
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
@@ -43,6 +43,55 @@ namespace COSMO.API.Controllers
             };
             return response;
         }
+
+        [HttpGet]
+        public ResponseDto<List<User>> GetAll()
+        {
+            ResponseDto<List<User>> response = new ResponseDto<List<User>>
+            {
+                Data = _userService.GetAll()
+            };
+            return response;
+
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public ResponseDto<User> Get([FromRoute] int id)
+        {
+            ResponseDto<User> response = new ResponseDto<User>
+            {
+                Data = _userService.Get(id)
+            };
+            return response;
+        }
+
+        [HttpPost]
+        public ResponseDto<User> Save([FromBody] User user)
+        {
+            ResponseDto<User> response = new ResponseDto<User>
+            {
+                Data = _userService.Save(user)
+            };
+            return response;
+        }
+
+        [HttpDelete]
+        public ResponseDto<bool> Delete([FromBody] User user)
+        {
+            ResponseDto<bool> response = new ResponseDto<bool>();
+            try
+            {
+                _userService.Delete(user);
+                response.Data = true;
+            }
+            catch
+            {
+                response.Data = false;
+            }
+            return response;
+        }
+
 
         //[HttpGet("userendpoint")]
         //public ResponseDto<User> GetTokenAttributes(string token)
