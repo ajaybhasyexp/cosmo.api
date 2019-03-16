@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace COSMO.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BranchController : ControllerBase

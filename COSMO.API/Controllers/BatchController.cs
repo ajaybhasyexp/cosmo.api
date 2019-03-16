@@ -8,7 +8,7 @@ namespace COSMO.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class BatchController : ControllerBase
     {
         #region Private members

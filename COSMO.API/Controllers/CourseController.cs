@@ -10,7 +10,7 @@ using COSMO.Models.Models;
 
 namespace COSMO.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CourseController : ControllerBase
