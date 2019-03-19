@@ -1,5 +1,6 @@
 ﻿using COSMO.Business.Abstractions;
 using COSMO.Models.Models;
+using COSMO.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -75,13 +76,29 @@ namespace COSMO.API.Controllers
         /// </summary>
         /// <param name="BatchAssignment">The entity to delete.</param>
         [HttpDelete]
-        public ResponseDto<bool> Delete([FromBody] BatchAssignment branch)
+        public ResponseDto<bool> Delete([FromBody] BatchAssignment batchAssign)
         {
             ResponseDto<bool> response = new ResponseDto<bool>();
             try
             {
-                _batchAssignmentService.Delete(branch);
+                _batchAssignmentService.Delete(batchAssign);
                 response.Data = true;
+
+            }
+            catch
+            {
+                response.Data = false;
+            }
+            return response;
+        }
+
+        [HttpGet]
+        public ResponseDto<BatchAssignVM> BatchAssigns(int? branchId)
+        {
+            ResponseDto<BatchAssignVM> response = new ResponseDto<BatchAssignVM>();
+            try
+            {
+                response.Data = _batchAssignmentService.Delete(branchId);                 
 
             }
             catch

@@ -33,12 +33,15 @@ namespace COSMO.API
             services.AddTransient<ICourseRepository, CourseRepository>();
             services.AddTransient<IBatchRepository, BatchRepository>();
             services.AddTransient<IUserRoleRepository, UserRoleRespository>();
+            services.AddTransient<IBatchAssignmentRepository, BatchAssignmentRepository>();
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBranchService, BranchService>();
             services.AddTransient<ICourseService, CourseService>();
             services.AddTransient<IBatchService, BatchService>();
             services.AddTransient<IUserRoleService, UserRoleService>();
+            services.AddTransient<IUserRoleService, UserRoleService>();
+            services.AddTransient<IBatchAssignmentService, BatchAssignmentService>();
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");

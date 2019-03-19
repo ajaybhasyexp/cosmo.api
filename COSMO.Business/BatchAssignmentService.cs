@@ -1,6 +1,7 @@
 ﻿using COSMO.Business.Abstractions;
 using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
+using COSMO.Models.ViewModel;
 using System.Collections.Generic;
 
 namespace COSMO.Business
@@ -35,6 +36,11 @@ namespace COSMO.Business
         public List<BatchAssignment> GetAll()
         {
             return _batchAssignmentRepository.GetAll();
+        }
+
+        public List<BatchAssignVM> GetVMs(int? branchId)
+        {
+            return _batchAssignmentRepository.GetAssignVMs(branchId);
         }
 
         public BatchAssignment Save(BatchAssignment branch)
