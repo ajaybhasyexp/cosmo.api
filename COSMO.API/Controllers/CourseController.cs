@@ -55,11 +55,21 @@ namespace COSMO.API.Controllers
         [HttpPost]
         public ResponseDto<Course> Save([FromBody] Course course)
         {
-            ResponseDto<Course> response = new ResponseDto<Course>
+            ResponseDto<Course> response = new ResponseDto<Course>();
+            try
             {
-                Data = _courseService.Save(course)
-            };
-            return response;
+                response = new ResponseDto<Course>
+                {
+                    Data = _courseService.Save(course),
+                    IsSuccess = true,
+                    Message = "Saved Successsfully."
+                };
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
         }
 
         /// <summary>
@@ -74,13 +84,14 @@ namespace COSMO.API.Controllers
             try
             {
                 _courseService.Delete(course);
-               response.Data = true;
+                response.Data = true;
+                response.Message = "Deleted Successfully";
+                return response;
             }
             catch (Exception ex)
             {
-                response.Data = false;
+                return response.HandleException(response);
             }
-            return response;
         }
 
         #endregion
