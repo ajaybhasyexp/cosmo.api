@@ -8,7 +8,7 @@
 
         public int BatchId { get; set; }
 
-        public string BatchName { get; set; }
+        public string Batch { get; set; }
 
         public int BranchId { get; set; }
 

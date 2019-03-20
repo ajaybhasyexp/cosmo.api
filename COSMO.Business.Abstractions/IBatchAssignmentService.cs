@@ -1,4 +1,5 @@
 ﻿using COSMO.Models.Models;
+using COSMO.Models.ViewModel;
 using System.Collections.Generic;
 
 namespace COSMO.Business.Abstractions
@@ -18,6 +19,6 @@ namespace COSMO.Business.Abstractions
 
         void Delete(BatchAssignment batchAssignment);
 
-        List<BatchAssignVM> GetVMs(int? branchId);
+        List<BatchAssignVM> GetVMs(int branchId);
     }
 }

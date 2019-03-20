@@ -34,11 +34,11 @@ namespace COSMO.Data.Repositories
             _config = config;
         }
 
-        public List<BatchAssignVM> GetAssignVMs(int? branchId)
+        public List<BatchAssignVM> GetAssignVMs(int branchId)
         {
             var sqlQuery = string.Empty;
-            if (branchId.HasValue || branchId.Value != 0)
-                sqlQuery = string.Format(Queries.BatchAssignment_get_filtered, branchId.Value);
+            if (branchId != 0)
+                sqlQuery = string.Format(Queries.BatchAssignment_get_filtered, branchId);
             else
                 sqlQuery = Queries.BatchAssignment_get;
 
