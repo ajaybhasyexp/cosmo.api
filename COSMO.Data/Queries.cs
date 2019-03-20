@@ -36,24 +36,26 @@
                                                     ('{0}','{1}','{2}','{3}','{4}',{5},
                                                       now(),now());";
 
-        public static readonly string BatchAssignment_get_filtered = @"SELECT ba.id
-	                                                        ,ba.courseid,c.CourseName
-	                                                        ,ba.batchid,b.BatchName
-	                                                        ,ba.Branchid,br.BranchName
-                                                        FROM batchassignments ba
-                                                        INNER JOIN courses c ON ba.courseid = c.id
-                                                        INNER JOIN batchs b ON ba.batchid = b.id
-                                                        INNER JOIN branchs br ON ba.Branchid = br.id
+        public static readonly string BatchAssignment_get_filtered = @"select ba.id,ba.courseid,c.CourseName AS Course, 
+                                                            ba.batchid, b.BatchName AS Batch, ba.Branchid, 
+                                                            br.BranchName AS Branch from batchassignments ba
+                                                            INNER JOIN courses c
+                                                            ON ba.courseid = c.id
+                                                            INNER JOIN batchs b
+                                                            ON ba.batchid = b.id
+                                                            INNER JOIN branchs br
+                                                            ON ba.Branchid = br.id
                                                         WHERE ba.branchid = {0}";
 
-        public static readonly string BatchAssignment_get = @"SELECT ba.id
-	                                                        ,ba.courseid,c.CourseName
-	                                                        ,ba.batchid,b.BatchName
-	                                                        ,ba.Branchid,br.BranchName
-                                                        FROM batchassignments ba
-                                                        INNER JOIN courses c ON ba.courseid = c.id
-                                                        INNER JOIN batchs b ON ba.batchid = b.id
-                                                        INNER JOIN branchs br ON ba.Branchid = br.id";
+        public static readonly string BatchAssignment_get = @"select ba.id,ba.courseid,c.CourseName AS Course, 
+                                                            ba.batchid, b.BatchName AS Batch, ba.Branchid, 
+                                                            br.BranchName AS Branch from batchassignments ba
+                                                            INNER JOIN courses c
+                                                            ON ba.courseid = c.id
+                                                            INNER JOIN batchs b
+                                                            ON ba.batchid = b.id
+                                                            INNER JOIN branchs br
+                                                            ON ba.Branchid = br.id";
 
     }
 }

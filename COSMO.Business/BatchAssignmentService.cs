@@ -38,7 +38,7 @@ namespace COSMO.Business
             return _batchAssignmentRepository.GetAll();
         }
 
-        public List<BatchAssignVM> GetVMs(int? branchId)
+        public List<BatchAssignVM> GetVMs(int branchId)
         {
             return _batchAssignmentRepository.GetAssignVMs(branchId);
         }

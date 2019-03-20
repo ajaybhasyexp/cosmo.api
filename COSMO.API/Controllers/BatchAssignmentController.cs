@@ -2,6 +2,7 @@
 using COSMO.Models.Models;
 using COSMO.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace COSMO.API.Controllers
@@ -93,17 +94,17 @@ namespace COSMO.API.Controllers
         }
 
         [HttpGet]
-        public ResponseDto<BatchAssignVM> BatchAssigns(int? branchId)
+        [Route("all/{branchId}")]
+        public ResponseDto<List<BatchAssignVM>> BatchAssigns(int branchId)
         {
-            ResponseDto<BatchAssignVM> response = new ResponseDto<BatchAssignVM>();
+            ResponseDto<List<BatchAssignVM>> response = new ResponseDto<List<BatchAssignVM>>();
             try
             {
-                response.Data = _batchAssignmentService.Delete(branchId);                 
-
+                response.Data = _batchAssignmentService.GetVMs(branchId);
             }
-            catch
+            catch(Exception ex)
             {
-                response.Data = false;
+
             }
             return response;
         }

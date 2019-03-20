@@ -6,6 +6,6 @@ namespace COSMO.Data.Abstractions.Repositories
 {
     public interface IBatchAssignmentRepository : IGenericRepository<BatchAssignment>
     {
-        List<BatchAssignVM> GetAssignVMs(int? branchId);
+        List<BatchAssignVM> GetAssignVMs(int branchId);
     }
 }
