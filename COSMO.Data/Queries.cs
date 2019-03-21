@@ -57,5 +57,7 @@
                                                             INNER JOIN branchs br
                                                             ON ba.Branchid = br.id";
 
+        public static readonly string BatchAssignmentFetch = @"SELECT * from Batchassignments where CourseId = {0} 
+                                                               AND BatchId = {1} AND BatchId={2}";
     }
 }

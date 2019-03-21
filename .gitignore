@@ -4,3 +4,4 @@ packages
 obj
 bin
 /.vscode
+/COSMO.API/COSMO.API.csproj.user
