@@ -43,9 +43,9 @@ namespace COSMO.Business
             return _batchAssignmentRepository.GetAssignVMs(branchId);
         }
 
-        public BatchAssignment Save(BatchAssignment branch)
+        public List<BatchAssignVM> Save(BatchAssignSaveVM assignments)
         {
-            return _batchAssignmentRepository.Save(branch);
+            return _batchAssignmentRepository.SaveBatchAssignVMs(assignments);
         }
 
         public void Delete(BatchAssignment batchAssignment)
