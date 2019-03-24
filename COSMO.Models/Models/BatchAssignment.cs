@@ -7,5 +7,7 @@
         public int CourseId { get; set; }
 
         public int BatchId { get; set; }
+
+        public bool IsBranchWise { get; set; }
     }
 }

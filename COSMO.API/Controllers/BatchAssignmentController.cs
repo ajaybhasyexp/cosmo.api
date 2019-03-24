@@ -65,10 +65,10 @@ namespace COSMO.API.Controllers
         /// <param name="BatchAssignment"></param>
         /// <returns>A saved or updated BatchAssignment entity.</returns>
         [HttpPost]
-        public ResponseDto<List<BatchAssignVM>> Save([FromBody]BatchAssignSaveVM assignments)
+        public ResponseDto<List<BatchAssignVM>> Save([FromBody]BatchAssignment assignment)
         {
             ResponseDto<List<BatchAssignVM>> response = new ResponseDto<List<BatchAssignVM>>();
-            response.Data = _batchAssignmentService.Save(assignments);
+            response.Data = _batchAssignmentService.Save(assignment);
             return response;
         }
 

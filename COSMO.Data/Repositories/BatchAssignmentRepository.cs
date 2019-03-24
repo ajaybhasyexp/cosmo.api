@@ -73,28 +73,15 @@ namespace COSMO.Data.Repositories
             }
         }
 
-        public List<BatchAssignVM> SaveBatchAssignVMs(BatchAssignSaveVM batchAssignSave)
+        public List<BatchAssignVM> SaveBatchAssignVMs(BatchAssignment assignment)
         {
-
-            if (batchAssignSave.Batches.Count != 0)
-            {
-                foreach (var batch in batchAssignSave.Batches)
-                {
-                    BatchAssignment assign = new BatchAssignment()
-                    {
-                        BatchId = batch.Id,
-                        BranchId = batchAssignSave.BranchId,
-                        CourseId = batchAssignSave.CourseId
-                    };
-                    Save(assign);
-                }
-            }
-            if (batchAssignSave.IsBranchWise)
-                return GetAssignVMs(batchAssignSave.BranchId);
+            SaveWithCheck(assignment);
+            if (assignment.IsBranchWise)
+                return GetAssignVMs(assignment.BranchId);
             else
                 return GetAssignVMs(0);
         }
 
-        
+
     }
 }

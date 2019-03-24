@@ -8,6 +8,6 @@ namespace COSMO.Data.Abstractions.Repositories
     {
         List<BatchAssignVM> GetAssignVMs(int branchId);
 
-        List<BatchAssignVM> SaveBatchAssignVMs(BatchAssignSaveVM batchAssignSave);
+        List<BatchAssignVM> SaveBatchAssignVMs(BatchAssignment assignment);
     }
 }

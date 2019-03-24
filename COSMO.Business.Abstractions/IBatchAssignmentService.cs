@@ -15,7 +15,7 @@ namespace COSMO.Business.Abstractions
 
         List<BatchAssignment> GetAll();
 
-        List<BatchAssignVM> Save(BatchAssignSaveVM assignments);
+        List<BatchAssignVM> Save(BatchAssignment assignment);
 
         void Delete(BatchAssignment batchAssignment);
 
