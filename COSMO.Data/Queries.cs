@@ -38,7 +38,7 @@
 
         public static readonly string BatchAssignment_get_filtered = @"select ba.id,ba.courseid,c.CourseName AS Course, 
                                                             ba.batchid, b.BatchName AS Batch, ba.Branchid, 
-                                                            br.BranchName AS Branch from batchassignments ba
+                                                            br.BranchName AS Branch, ba.id from batchassignments ba
                                                             INNER JOIN courses c
                                                             ON ba.courseid = c.id
                                                             INNER JOIN batchs b
@@ -49,7 +49,7 @@
 
         public static readonly string BatchAssignment_get = @"select ba.id,ba.courseid,c.CourseName AS Course, 
                                                             ba.batchid, b.BatchName AS Batch, ba.Branchid, 
-                                                            br.BranchName AS Branch from batchassignments ba
+                                                            br.BranchName AS Branch, ba.id from batchassignments ba
                                                             INNER JOIN courses c
                                                             ON ba.courseid = c.id
                                                             INNER JOIN batchs b
