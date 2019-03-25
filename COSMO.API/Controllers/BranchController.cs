@@ -1,6 +1,6 @@
-﻿using COSMO.Business.Abstractions;
+﻿using COSMO.API.Resources;
+using COSMO.Business.Abstractions;
 using COSMO.Models.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -18,17 +18,23 @@ namespace COSMO.API.Controllers
         /// </summary>
         private IBranchService _branchServive { get; set; }
 
+        /// <summary>
+        /// The common resource file.
+        /// </summary>
+        private ICommonResource _commonResource { get; set; }
+
         #endregion
 
         /// <summary>
         /// Constructor for injection.
         /// </summary>
         /// <param name="branchServive">The branch service to inject.</param>
-        public BranchController(IBranchService branchServive)
+        public BranchController(IBranchService branchServive, ICommonResource commonResource)
         {
             _branchServive = branchServive;
+            _commonResource = commonResource;
         }
-        
+
 
         /// <summary>
         /// Gets all the branch entities.
@@ -37,11 +43,17 @@ namespace COSMO.API.Controllers
         [HttpGet]
         public ResponseDto<List<Branch>> GetAll()
         {
-            ResponseDto<List<Branch>> response = new ResponseDto<List<Branch>>
+            ResponseDto<List<Branch>> response = new ResponseDto<List<Branch>>(_commonResource);
+            try
             {
-                Data = _branchServive.GetAll()
-            };
-            return response;
+                response.Data = _branchServive.GetAll();
+                return response;
+
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
         }
 
         /// <summary>
@@ -53,11 +65,17 @@ namespace COSMO.API.Controllers
         [Route("{id}")]
         public ResponseDto<Branch> Get([FromRoute] int id)
         {
-            ResponseDto<Branch> response = new ResponseDto<Branch>
+            ResponseDto<Branch> response = new ResponseDto<Branch>(_commonResource);
+            try
             {
-                Data = _branchServive.Get(id)
-            };
-            return response;
+                response.Data = _branchServive.Get(id);
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+            
         }
 
         /// <summary>
@@ -68,9 +86,16 @@ namespace COSMO.API.Controllers
         [HttpPost]
         public ResponseDto<Branch> Save([FromBody]Branch branch)
         {
-            ResponseDto<Branch> response = new ResponseDto<Branch>();
-            response.Data = _branchServive.Save(branch);
-            return response;
+            ResponseDto<Branch> response = new ResponseDto<Branch>(_commonResource);
+            try
+            {
+                response.Data = _branchServive.Save(branch);
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
         }
 
         /// <summary>
@@ -80,18 +105,16 @@ namespace COSMO.API.Controllers
         [HttpDelete]
         public ResponseDto<bool> Delete([FromBody] Branch branch)
         {
-            ResponseDto<bool> response = new ResponseDto<bool>();
+            ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
             try
             {
                 _branchServive.Delete(branch);
-                response.Data = true;
-                
+                return response;
             }
             catch
             {
-                response.Data = false;
+                return response.HandleException(response);
             }
-            return response;
         }
     }
 }

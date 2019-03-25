@@ -1,4 +1,5 @@
-﻿using COSMO.Business.Abstractions;
+﻿using COSMO.API.Resources;
+using COSMO.Business.Abstractions;
 using COSMO.Models.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,15 +19,21 @@ namespace COSMO.API.Controllers
         /// </summary>
         private IBatchService _batchService { get; set; }
 
+        /// <summary>
+        /// The common resource file.
+        /// </summary>
+        private ICommonResource _commonResource { get; set; }
+
         #endregion
 
         /// <summary>
         /// Constructor for injection.
         /// </summary>
         /// <param name="branchServive">The branch service to inject.</param>
-        public BatchController(IBatchService batchService)
+        public BatchController(IBatchService batchService, ICommonResource commonResource)
         {
             _batchService = batchService;
+            _commonResource = commonResource;
         }
 
         /// <summary>
@@ -36,11 +43,17 @@ namespace COSMO.API.Controllers
         [HttpGet]
         public ResponseDto<List<Batch>> GetAll()
         {
-            ResponseDto<List<Batch>> response = new ResponseDto<List<Batch>>
+            ResponseDto<List<Batch>> response = new ResponseDto<List<Batch>>(_commonResource);
+            try
             {
-                Data = _batchService.GetAll()
-            };
-            return response;
+                response.Data = _batchService.GetAll();
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+
         }
 
         /// <summary>
@@ -52,11 +65,16 @@ namespace COSMO.API.Controllers
         [Route("{id}")]
         public ResponseDto<Batch> Get([FromRoute] int id)
         {
-            ResponseDto<Batch> response = new ResponseDto<Batch>
+            ResponseDto<Batch> response = new ResponseDto<Batch>(_commonResource);
+            try
             {
-                Data = _batchService.Get(id)
-            };
-            return response;
+                response.Data = _batchService.Get(id);
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
         }
 
         /// <summary>
@@ -68,9 +86,16 @@ namespace COSMO.API.Controllers
         [AllowAnonymous]
         public ResponseDto<Batch> Save([FromBody]Batch branch)
         {
-            ResponseDto<Batch> response = new ResponseDto<Batch>();
-            response.Data = _batchService.Save(branch);
-            return response;
+            ResponseDto<Batch> response = new ResponseDto<Batch>(_commonResource);
+            try
+            {
+                response.Data = _batchService.Save(branch);
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using COSMO.Business;
+﻿using COSMO.API.Resources;
+using COSMO.Business;
 using COSMO.Business.Abstractions;
 using COSMO.Data.Abstractions.Repositories;
 using COSMO.Data.Repositories;
@@ -6,11 +7,13 @@ using COSMO.Models.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Globalization;
 using System.Text;
 
 namespace COSMO.API
@@ -42,6 +45,25 @@ namespace COSMO.API
             services.AddTransient<IUserRoleService, UserRoleService>();
             services.AddTransient<IUserRoleService, UserRoleService>();
             services.AddTransient<IBatchAssignmentService, BatchAssignmentService>();
+            services.AddTransient<ICommonResource, CommonResource>();
+
+            services.AddLocalization(o => o.ResourcesPath = "Resources");
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[] { new CultureInfo("en-US") };
+                options.DefaultRequestCulture = new RequestCulture("en-US", "en-US");
+
+                // You must explicitly state which cultures your application supports.
+                // These are the cultures the app supports for formatting 
+                // numbers, dates, etc.
+
+                options.SupportedCultures = supportedCultures;
+
+                // These are the cultures the app supports for UI strings, 
+                // i.e. we have localized resources for.
+
+                options.SupportedUICultures = supportedCultures;
+            });
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");

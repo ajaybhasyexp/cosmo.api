@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using COSMO.API.Resources;
 using COSMO.Business.Abstractions;
-using Microsoft.AspNetCore.Authorization;
 using COSMO.Models.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace COSMO.API.Controllers
 {
@@ -22,11 +18,17 @@ namespace COSMO.API.Controllers
         /// </summary>
         private ICourseService _courseService { get; set; }
 
+        /// <summary>
+        /// The common resource file.
+        /// </summary>
+        private ICommonResource _commonResource { get; set; }
+
         #endregion
 
-        public CourseController(ICourseService courseService)
+        public CourseController(ICourseService courseService, ICommonResource commonResource)
         {
             _courseService = courseService;
+            _commonResource = commonResource;
         }
 
         #region Public Methods
@@ -34,36 +36,41 @@ namespace COSMO.API.Controllers
         [HttpGet]
         public ResponseDto<List<Course>> GetAll()
         {
-            ResponseDto<List<Course>> response = new ResponseDto<List<Course>>
+            ResponseDto<List<Course>> response = new ResponseDto<List<Course>>(_commonResource);
+            try
             {
-                Data = _courseService.GetAll()
-            };
-            return response;
+                response.Data = _courseService.GetAll();
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
         }
 
         [HttpGet]
         [Route("{id}")]
         public ResponseDto<Course> Get(int id)
         {
-            ResponseDto<Course> response = new ResponseDto<Course>
+            ResponseDto<Course> response = new ResponseDto<Course>(_commonResource);
+            try
             {
-                Data = _courseService.Get(id)
-            };
-            return response;
+                response.Data = _courseService.Get(id);
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
         }
 
         [HttpPost]
         public ResponseDto<Course> Save([FromBody] Course course)
         {
-            ResponseDto<Course> response = new ResponseDto<Course>();
+            ResponseDto<Course> response = new ResponseDto<Course>(_commonResource);
             try
             {
-                response = new ResponseDto<Course>
-                {
-                    Data = _courseService.Save(course),
-                    IsSuccess = true,
-                    Message = "Saved Successsfully."
-                };
+                response.Data = _courseService.Save(course);
                 return response;
             }
             catch
@@ -80,15 +87,13 @@ namespace COSMO.API.Controllers
         [HttpDelete]
         public ResponseDto<bool> Delete([FromBody] Course course)
         {
-            ResponseDto<bool> response = new ResponseDto<bool>();
+            ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
             try
             {
                 _courseService.Delete(course);
-                response.Data = true;
-                response.Message = "Deleted Successfully";
                 return response;
             }
-            catch (Exception ex)
+            catch
             {
                 return response.HandleException(response);
             }

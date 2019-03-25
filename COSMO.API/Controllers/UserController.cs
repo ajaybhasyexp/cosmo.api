@@ -1,4 +1,5 @@
-﻿using COSMO.Business.Abstractions;
+﻿using COSMO.API.Resources;
+using COSMO.Business.Abstractions;
 using COSMO.Models.UserModule;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,85 +12,125 @@ namespace COSMO.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        #region Private Members
+
         private IUserService _userService { get; set; }
 
         private IUserRoleService _userRoleService { get; set; }
 
-        public UserController(IUserService userService, IUserRoleService userRoleService)
+        /// <summary>
+        /// The common resource file.
+        /// </summary>
+        private ICommonResource _commonResource { get; set; }
+
+        #endregion
+
+        public UserController(IUserService userService, IUserRoleService userRoleService, ICommonResource commonResource)
         {
             _userService = userService;
+            _commonResource = commonResource;
             _userRoleService = userRoleService;
         }
 
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]User userParam)
+        public ResponseDto<User> Authenticate([FromBody]User userParam)
         {
-            var user = _userService.Authenticate(userParam.UserName, userParam.Password);
+            ResponseDto<User> response = new ResponseDto<User>(_commonResource);
+            try
+            {
+                response.Data = _userService.Authenticate(userParam.UserName, userParam.Password);
+                if (response.Data == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = _commonResource.InvalidUser;
+                }
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }           
 
-            if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
-
-            return Ok(user);
         }
 
         [HttpGet("roles")]
         public ResponseDto<List<UserRole>> GetUserRoles()
         {
-            ResponseDto<List<UserRole>> response = new ResponseDto<List<UserRole>>
+            ResponseDto<List<UserRole>> response = new ResponseDto<List<UserRole>>(_commonResource);
+            try
             {
-                Data = _userRoleService.GetAll()
-            };
-            return response;
+                response.Data = _userRoleService.GetAll();
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+
         }
 
         [HttpGet]
         public ResponseDto<List<User>> GetAll()
         {
-            ResponseDto<List<User>> response = new ResponseDto<List<User>>
+            ResponseDto<List<User>> response = new ResponseDto<List<User>>(_commonResource);
+            try
             {
-                Data = _userService.GetAll()
-            };
-            return response;
-
+                response.Data = _userService.GetAll();
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
         }
 
         [HttpGet]
         [Route("{id}")]
         public ResponseDto<User> Get([FromRoute] int id)
         {
-            ResponseDto<User> response = new ResponseDto<User>
+            ResponseDto<User> response = new ResponseDto<User>(_commonResource);
+            try
             {
-                Data = _userService.Get(id)
-            };
-            return response;
+                response.Data = _userService.Get(id);
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+
         }
 
         [HttpPost]
         public ResponseDto<User> Save([FromBody] User user)
         {
-            ResponseDto<User> response = new ResponseDto<User>
+            ResponseDto<User> response = new ResponseDto<User>(_commonResource);
+            try
             {
-                Data = _userService.Save(user)
-            };
-            return response;
+                response.Data = _userService.Save(user);
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
         }
 
         [HttpDelete]
         public ResponseDto<bool> Delete([FromBody] User user)
         {
-            ResponseDto<bool> response = new ResponseDto<bool>();
+            ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
             try
             {
                 _userService.Delete(user);
-                response.Data = true;
+                return response;
             }
             catch
             {
-                response.Data = false;
+                return response.HandleException(response);
             }
-            return response;
         }
 
 

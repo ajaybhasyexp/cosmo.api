@@ -4,6 +4,7 @@ using COSMO.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using COSMO.API.Resources;
 
 namespace COSMO.API.Controllers
 {
@@ -18,15 +19,21 @@ namespace COSMO.API.Controllers
         /// </summary>
         private IBatchAssignmentService _batchAssignmentService { get; set; }
 
+        /// <summary>
+        /// The common resource file.
+        /// </summary>
+        private ICommonResource _commonResource { get; set; }
+
         #endregion
 
         /// <summary>
         /// Constructor for injection.
         /// </summary>
         /// <param name="branchServive">The branch service to inject.</param>
-        public BatchAssignmentController(IBatchAssignmentService batchAssignmentService)
+        public BatchAssignmentController(IBatchAssignmentService batchAssignmentService, ICommonResource commonResource)
         {
             _batchAssignmentService = batchAssignmentService;
+            _commonResource = commonResource;
         }
 
         /// <summary>
@@ -36,11 +43,19 @@ namespace COSMO.API.Controllers
         [HttpGet]
         public ResponseDto<List<BatchAssignment>> GetAll()
         {
-            ResponseDto<List<BatchAssignment>> response = new ResponseDto<List<BatchAssignment>>
+            ResponseDto<List<BatchAssignment>> response = new ResponseDto<List<BatchAssignment>>(_commonResource);
+            try
             {
-                Data = _batchAssignmentService.GetAll()
-            };
-            return response;
+                response.Data = _batchAssignmentService.GetAll();
+                response.IsSuccess = true;
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+            
+            
         }
 
         /// <summary>
@@ -52,10 +67,16 @@ namespace COSMO.API.Controllers
         [Route("{id}")]
         public ResponseDto<BatchAssignment> Get([FromRoute] int id)
         {
-            ResponseDto<BatchAssignment> response = new ResponseDto<BatchAssignment>
+            ResponseDto<BatchAssignment> response = new ResponseDto<BatchAssignment>(_commonResource);
+            try
             {
-                Data = _batchAssignmentService.Get(id)
-            };
+                response.Data = _batchAssignmentService.Get(id);
+                response.IsSuccess = true;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
             return response;
         }
 
@@ -67,7 +88,7 @@ namespace COSMO.API.Controllers
         [HttpPost]
         public ResponseDto<List<BatchAssignVM>> Save([FromBody]BatchAssignment assignment)
         {
-            ResponseDto<List<BatchAssignVM>> response = new ResponseDto<List<BatchAssignVM>>();
+            ResponseDto<List<BatchAssignVM>> response = new ResponseDto<List<BatchAssignVM>>(_commonResource);
             response.Data = _batchAssignmentService.Save(assignment);
             return response;
         }
@@ -79,7 +100,7 @@ namespace COSMO.API.Controllers
         [HttpDelete]
         public ResponseDto<bool> Delete([FromBody] BatchAssignment batchAssign)
         {
-            ResponseDto<bool> response = new ResponseDto<bool>();
+            ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
             try
             {
                 _batchAssignmentService.Delete(batchAssign);
@@ -97,14 +118,14 @@ namespace COSMO.API.Controllers
         [Route("all/{branchId}")]
         public ResponseDto<List<BatchAssignVM>> BatchAssigns(int branchId)
         {
-            ResponseDto<List<BatchAssignVM>> response = new ResponseDto<List<BatchAssignVM>>();
+            ResponseDto<List<BatchAssignVM>> response = new ResponseDto<List<BatchAssignVM>>(_commonResource);
             try
             {
                 response.Data = _batchAssignmentService.GetVMs(branchId);
             }
-            catch(Exception ex)
+            catch
             {
-
+                return response.HandleException(response);
             }
             return response;
         }
