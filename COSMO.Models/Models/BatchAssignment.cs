@@ -1,4 +1,6 @@
-﻿namespace COSMO.Models.Models
+﻿using Dapper.Contrib.Extensions;
+
+namespace COSMO.Models.Models
 {
     public class BatchAssignment : Base
     {
@@ -8,6 +10,7 @@
 
         public int BatchId { get; set; }
 
+        [Write(false)]
         public bool IsBranchWise { get; set; }
     }
 }
