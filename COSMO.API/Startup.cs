@@ -37,6 +37,7 @@ namespace COSMO.API
             services.AddTransient<IBatchRepository, BatchRepository>();
             services.AddTransient<IUserRoleRepository, UserRoleRespository>();
             services.AddTransient<IBatchAssignmentRepository, BatchAssignmentRepository>();
+            services.AddTransient<ICourseFeeRepository, CourseFeeRepository>();
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBranchService, BranchService>();
@@ -45,6 +46,7 @@ namespace COSMO.API
             services.AddTransient<IUserRoleService, UserRoleService>();
             services.AddTransient<IUserRoleService, UserRoleService>();
             services.AddTransient<IBatchAssignmentService, BatchAssignmentService>();
+            services.AddTransient<ICourseFeeService, CourseFeeService>();
             services.AddTransient<ICommonResource, CommonResource>();
 
             services.AddLocalization(o => o.ResourcesPath = "Resources");

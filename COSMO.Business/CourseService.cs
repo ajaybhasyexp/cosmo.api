@@ -59,6 +59,11 @@ namespace COSMO.Business
             _courseRepository.Delete(course);
         }
 
+        public List<Course> GetAssignedCourse(int branchId)
+        {
+            return _courseRepository.GetAssignedCourses(branchId);
+        }
+
         #endregion
     }
 }

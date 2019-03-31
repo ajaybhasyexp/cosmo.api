@@ -2,6 +2,7 @@
 using COSMO.Business.Abstractions;
 using COSMO.Models.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace COSMO.API.Controllers
@@ -59,6 +60,22 @@ namespace COSMO.API.Controllers
                 return response;
             }
             catch
+            {
+                return response.HandleException(response);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id}/assigned")]
+        public ResponseDto<List<Course>> GetAssigned(int id)
+        {
+            ResponseDto<List<Course>> response = new ResponseDto<List<Course>>(_commonResource);
+            try
+            {
+                response.Data = _courseService.GetAssignedCourse(id);
+                return response;
+            }
+            catch(Exception ex)
             {
                 return response.HandleException(response);
             }

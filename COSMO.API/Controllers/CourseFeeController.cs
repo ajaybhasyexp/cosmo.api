@@ -1,23 +1,22 @@
 ﻿using COSMO.API.Resources;
 using COSMO.Business.Abstractions;
-using COSMO.Models.Exceptions;
 using COSMO.Models.Models;
-using COSMO.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace COSMO.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BatchAssignmentController : ControllerBase
+    public class CourseFeeController : ControllerBase
     {
         #region Private members
 
         /// <summary>
         /// The branch service for busines methods.
         /// </summary>
-        private IBatchAssignmentService _batchAssignmentService { get; set; }
+        private ICourseFeeService _courseFeeService { get; set; }
 
         /// <summary>
         /// The common resource file.
@@ -30,33 +29,12 @@ namespace COSMO.API.Controllers
         /// Constructor for injection.
         /// </summary>
         /// <param name="branchServive">The branch service to inject.</param>
-        public BatchAssignmentController(IBatchAssignmentService batchAssignmentService, ICommonResource commonResource)
+        public CourseFeeController(ICourseFeeService courseFeeService, ICommonResource commonResource)
         {
-            _batchAssignmentService = batchAssignmentService;
+            _courseFeeService = courseFeeService;
             _commonResource = commonResource;
         }
 
-        /// <summary>
-        /// Gets all the BatchAssignment entities.
-        /// </summary>
-        /// <returns>A list of BatchAssignment entity.</returns>
-        [HttpGet]
-        public ResponseDto<List<BatchAssignment>> GetAll()
-        {
-            ResponseDto<List<BatchAssignment>> response = new ResponseDto<List<BatchAssignment>>(_commonResource);
-            try
-            {
-                response.Data = _batchAssignmentService.GetAll();
-                response.IsSuccess = true;
-                return response;
-            }
-            catch
-            {
-                return response.HandleException(response);
-            }
-
-
-        }
 
         /// <summary>
         /// Gets a branch entity by id.
@@ -65,12 +43,12 @@ namespace COSMO.API.Controllers
         /// <returns>A BatchAssignment entity.</returns>
         [HttpGet]
         [Route("{id}")]
-        public ResponseDto<BatchAssignment> Get([FromRoute] int id)
+        public ResponseDto<CourseFee> Get([FromRoute] int id)
         {
-            ResponseDto<BatchAssignment> response = new ResponseDto<BatchAssignment>(_commonResource);
+            ResponseDto<CourseFee> response = new ResponseDto<CourseFee>(_commonResource);
             try
             {
-                response.Data = _batchAssignmentService.Get(id);
+                response.Data = _courseFeeService.Get(id);
                 response.IsSuccess = true;
             }
             catch
@@ -86,19 +64,15 @@ namespace COSMO.API.Controllers
         /// <param name="BatchAssignment"></param>
         /// <returns>A saved or updated BatchAssignment entity.</returns>
         [HttpPost]
-        public ResponseDto<List<BatchAssignVM>> Save([FromBody]BatchAssignment assignment)
+        public ResponseDto<CourseFee> Save([FromBody]CourseFee assignment)
         {
-            ResponseDto<List<BatchAssignVM>> response = new ResponseDto<List<BatchAssignVM>>(_commonResource);
+            ResponseDto<CourseFee> response = new ResponseDto<CourseFee>(_commonResource);
             try
             {
-                response.Data = _batchAssignmentService.Save(assignment);
+                response.Data = _courseFeeService.Save(assignment);
                 return response;
             }
-            catch (CosmoBusinessException ex)
-            {
-                return response.HandleCustomException(response, ex);
-            }
-            catch
+            catch (Exception ex)
             {
                 return response.HandleException(response);
             }
@@ -107,34 +81,34 @@ namespace COSMO.API.Controllers
         /// <summary>
         /// Deletes the BatchAssignment entity.
         /// </summary>
-        /// <param name="BatchAssignment">The entity to delete.</param>
+        /// <param name="courseFee">The entity to delete.</param>
         [HttpDelete]
-        public ResponseDto<bool> Delete([FromBody] BatchAssignment batchAssign)
+        public ResponseDto<bool> Delete([FromBody] CourseFee courseFee)
         {
             ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
             try
             {
-                _batchAssignmentService.Delete(batchAssign);
+                _courseFeeService.Delete(courseFee);
                 response.Data = true;
 
             }
-            catch
+            catch (Exception ex)
             {
-                return response.HandleException(response);
+                return response.HandleDeleteException(response, ex);
             }
             return response;
         }
 
         [HttpGet]
         [Route("all/{branchId}")]
-        public ResponseDto<List<BatchAssignVM>> BatchAssigns(int branchId)
+        public ResponseDto<List<CourseFee>> CourseFees(int branchId)
         {
-            ResponseDto<List<BatchAssignVM>> response = new ResponseDto<List<BatchAssignVM>>(_commonResource);
+            ResponseDto<List<CourseFee>> response = new ResponseDto<List<CourseFee>>(_commonResource);
             try
             {
-                response.Data = _batchAssignmentService.GetVMs(branchId);
+                response.Data = _courseFeeService.GetAll(branchId);
             }
-            catch
+            catch (Exception ex)
             {
                 return response.HandleException(response);
             }

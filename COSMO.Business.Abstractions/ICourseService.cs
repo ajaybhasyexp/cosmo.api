@@ -1,7 +1,5 @@
 ﻿using COSMO.Models.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace COSMO.Business.Abstractions
 {
@@ -23,8 +21,24 @@ namespace COSMO.Business.Abstractions
         /// <returns>A list of courses.</returns>
         List<Course> GetAll();
 
+        /// <summary>
+        /// Gets the course based on the identifier.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         Course Get(int id);
 
+        /// <summary>
+        /// Deletes the course entity.
+        /// </summary>
+        /// <param name="course"></param>
         void Delete(Course course);
+
+        /// <summary>
+        /// Gets the courses assigned to branch.
+        /// </summary>
+        /// <param name="baranchId">The branch identfier.</param>
+        /// <returns>A list of courses.</returns>
+        List<Course> GetAssignedCourse(int branchId);
     }
 }

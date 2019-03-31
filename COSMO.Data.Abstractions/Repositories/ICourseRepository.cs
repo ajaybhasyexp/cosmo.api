@@ -7,6 +7,6 @@ namespace COSMO.Data.Abstractions.Repositories
 {
     public interface ICourseRepository : IGenericRepository<Course>
     {
-        
+        List<Course> GetAssignedCourses(int branchId);
     }
 }

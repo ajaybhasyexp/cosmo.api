@@ -1,4 +1,6 @@
 ﻿using COSMO.Data.Abstractions.Repositories;
+using COSMO.Models.Common;
+using COSMO.Models.Exceptions;
 using COSMO.Models.Models;
 using COSMO.Models.ViewModel;
 using Dapper;
@@ -17,7 +19,7 @@ namespace COSMO.Data.Repositories
         /// <summary>
         /// The configuration.
         /// </summary>
-        private readonly IConfiguration _config;
+        private readonly IConfiguration _config;        
 
         /// <summary>
         /// The common property to get connection.
@@ -50,6 +52,10 @@ namespace COSMO.Data.Repositories
                     batchAssignment.CreatedDate = DateTime.Now;
                     batchAssignment.UpdatedDate = DateTime.Now;
                     conn.Insert(batchAssignment);
+                }
+                else
+                {
+                    throw new CosmoBusinessException(ExceptionConstants.BatchAssignmentExists);
                 }
                 return assignment;
             }

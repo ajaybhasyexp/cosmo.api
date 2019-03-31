@@ -423,6 +423,9 @@
 <row name="UpdatedDate" null="0" autoincrement="0">
 <datatype>DATETIME</datatype>
 </row>
+<row name="Credits" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
 <key type="PRIMARY" name="">
 <part>Id</part>
 </key>
