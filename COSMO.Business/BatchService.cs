@@ -36,5 +36,10 @@ namespace COSMO.Business
         {
             return _branchRepository.Save(branch);
         }
+
+        public List<Batch> GetAssigned(int branchId, int courseId)
+        {
+            return _branchRepository.GetAssignedBatches(branchId, courseId);
+        }
     }
 }

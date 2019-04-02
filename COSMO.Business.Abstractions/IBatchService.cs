@@ -24,5 +24,7 @@ namespace COSMO.Business.Abstractions
         /// <param name="id">The id to get the branch.</param>
         /// <returns>A branch entity</returns>
         Batch Get(int id);
+
+        List<Batch> GetAssigned(int branchId, int courseId);
     }
 }

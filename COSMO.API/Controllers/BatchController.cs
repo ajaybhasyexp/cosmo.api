@@ -56,6 +56,17 @@ namespace COSMO.API.Controllers
 
         }
 
+        [HttpGet]
+        [Route("{branchId}/assigned/{courseId}")]
+        public ResponseDto<List<Batch>> GetAssignedBatches(int branchId, int courseId)
+        {
+            ResponseDto<List<Batch>> response = new ResponseDto<List<Batch>>(_commonResource);
+           
+                response.Data = _batchService.GetAssigned(branchId, courseId);
+                return response;
+          
+        }
+
         /// <summary>
         /// Gets a branch entity by id.
         /// </summary>
