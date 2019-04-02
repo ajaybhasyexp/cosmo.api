@@ -3,6 +3,7 @@ using COSMO.Business.Abstractions;
 using COSMO.Models.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace COSMO.API.Controllers
@@ -61,9 +62,16 @@ namespace COSMO.API.Controllers
         public ResponseDto<List<Batch>> GetAssignedBatches(int branchId, int courseId)
         {
             ResponseDto<List<Batch>> response = new ResponseDto<List<Batch>>(_commonResource);
-           
+
+            try
+            {
                 response.Data = _batchService.GetAssigned(branchId, courseId);
                 return response;
+            }
+            catch(Exception ex)
+            {
+                return response.HandleException(response);
+            }
           
         }
 

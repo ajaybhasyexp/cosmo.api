@@ -23,7 +23,7 @@ namespace COSMO.Data.Repositories
         public BatchRepository(IConfiguration config)
             : base(config)
         {
-            //_config = config;
+            _config = config;
         }
 
         /// <summary>

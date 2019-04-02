@@ -170,7 +170,7 @@
 <part>Id</part>
 </key>
 </table>
-<table x="1225" y="405" name="Batchs">
+<table x="1291" y="322" name="Batchs">
 <row name="Id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 </row>
@@ -322,15 +322,18 @@
 <row name="Address" null="1" autoincrement="0">
 <datatype>VARCHAR(300)</datatype>
 <default>NULL</default></row>
-<row name="Qualification" null="1" autoincrement="0">
-<datatype>VARCHAR(100)</datatype>
-<default>NULL</default></row>
-<row name="Profession" null="0" autoincrement="0">
-<datatype>VARCHAR(100)</datatype>
+<row name="QualificationId" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Qualifications" row="Id" />
+</row>
+<row name="ProfessionId" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Professions" row="Id" />
 </row>
 <row name="SourceId" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="Sources" row="Id" />
+</row>
 <row name="FeesPaid" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -491,6 +494,39 @@
 <row name="UpdatedBy" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Users" row="Id" />
+</row>
+<key type="PRIMARY" name="">
+<part>Id</part>
+</key>
+</table>
+<table x="1093" y="617" name="Professions">
+<row name="Id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="Profession" null="0" autoincrement="0">
+<datatype>VARCHAR(250)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>Id</part>
+</key>
+</table>
+<table x="1284" y="634" name="Sources">
+<row name="Id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="Source" null="1" autoincrement="0">
+<datatype>VARCHAR(250)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>Id</part>
+</key>
+</table>
+<table x="1273" y="548" name="Qualifications">
+<row name="Id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="Qualification" null="0" autoincrement="0">
+<datatype>VARCHAR(250)</datatype>
 </row>
 <key type="PRIMARY" name="">
 <part>Id</part>

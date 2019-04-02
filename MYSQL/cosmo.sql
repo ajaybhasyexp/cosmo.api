@@ -176,8 +176,8 @@ CREATE TABLE `Students` (
   `ContactNumber` VARCHAR(15) NOT NULL,
   `Email` VARCHAR(100) NOT NULL,
   `Address` VARCHAR(300) NULL DEFAULT NULL,
-  `Qualification` VARCHAR(100) NULL DEFAULT NULL,
-  `Profession` VARCHAR(100) NOT NULL,
+  `QualificationId` INTEGER NULL DEFAULT NULL,
+  `ProfessionId` INTEGER NULL DEFAULT NULL,
   `SourceId` INTEGER NULL DEFAULT NULL,
   `FeesPaid` INTEGER NULL DEFAULT NULL,
   `CreatedBy` INTEGER NULL DEFAULT NULL,
@@ -267,6 +267,45 @@ CREATE TABLE `PaymentMethods` (
 );
 
 -- ---
+-- Table 'Professions'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Professions`;
+		
+CREATE TABLE `Professions` (
+  `Id` INTEGER NOT NULL AUTO_INCREMENT,
+  `Profession` VARCHAR(250) NOT NULL,
+  PRIMARY KEY (`Id`)
+);
+
+-- ---
+-- Table 'Sources'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Sources`;
+		
+CREATE TABLE `Sources` (
+  `Id` INTEGER NOT NULL AUTO_INCREMENT,
+  `Source` VARCHAR(250) NULL,
+  PRIMARY KEY (`Id`)
+);
+
+-- ---
+-- Table 'Qualifications'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Qualifications`;
+		
+CREATE TABLE `Qualifications` (
+  `Id` INTEGER NOT NULL AUTO_INCREMENT,
+  `Qualification` VARCHAR(250) NOT NULL,
+  PRIMARY KEY (`Id`)
+);
+
+-- ---
 -- Foreign Keys 
 -- ---
 
@@ -289,6 +328,9 @@ ALTER TABLE `Staffs` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
 ALTER TABLE `Staffs` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
 ALTER TABLE `StaffRoles` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
 ALTER TABLE `StaffRoles` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `Students` ADD FOREIGN KEY (QualificationId) REFERENCES `Qualifications` (`Id`);
+ALTER TABLE `Students` ADD FOREIGN KEY (ProfessionId) REFERENCES `Professions` (`Id`);
+ALTER TABLE `Students` ADD FOREIGN KEY (SourceId) REFERENCES `Sources` (`Id`);
 ALTER TABLE `Students` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
 ALTER TABLE `Students` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
 ALTER TABLE `StudentAssignments` ADD FOREIGN KEY (BatchAssignId) REFERENCES `BatchAssignments` (`Id`);
@@ -328,6 +370,9 @@ ALTER TABLE `PaymentMethods` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id
 -- ALTER TABLE `CourseFees` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- ALTER TABLE `Receipts` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- ALTER TABLE `PaymentMethods` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Profession` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Source` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Qualification` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ---
 -- Test Data
@@ -349,7 +394,7 @@ ALTER TABLE `PaymentMethods` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id
 -- ('','','','','','','','','','','');
 -- INSERT INTO `StaffRoles` (`Id`,`StaffRole`,`Description`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
 -- ('','','','','','','');
--- INSERT INTO `Students` (`Id`,`StudentName`,`ContactNumber`,`Email`,`Address`,`Qualification`,`Profession`,`SourceId`,`FeesPaid`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
+-- INSERT INTO `Students` (`Id`,`StudentName`,`ContactNumber`,`Email`,`Address`,`QualificationId`,`ProfessionId`,`SourceId`,`FeesPaid`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
 -- ('','','','','','','','','','','','','');
 -- INSERT INTO `StudentAssignments` (`Id`,`BatchAssignId`,`StudentId`,`CourseFeeId`,`ReceiptId`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
 -- ('','','','','','','','','');
@@ -359,3 +404,9 @@ ALTER TABLE `PaymentMethods` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id
 -- ('','','','','','','','','');
 -- INSERT INTO `PaymentMethods` (`Id`,`PaymentMethod`,`BranchId`,`CreatedDate`,`UpdatedDate`,`CreatedBy`,`UpdatedBy`) VALUES
 -- ('','','','','','','');
+-- INSERT INTO `Profession` (`Id`,`Profession`) VALUES
+-- ('','');
+-- INSERT INTO `Source` (`Id`,`Source`) VALUES
+-- ('','');
+-- INSERT INTO `Qualification` (`Id`,`Qualification`) VALUES
+-- ('','');
