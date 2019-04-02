@@ -41,5 +41,16 @@ namespace COSMO.Business
         {
             return _courseFeeRepository.Save(courseFee);
         }
+
+        /// <summary>
+        /// Gets the possible fees structure against a branch an course.
+        /// </summary>
+        /// <param name="branchId">The barnch Identifier</param>
+        /// <param name="courseId">The course identifier.</param>
+        /// <returns>A list of coursefee objects</returns>
+        public List<CourseFee> GetCourseFee(int branchId, int courseId)
+        {
+            return _courseFeeRepository.GetCourseFee(branchId, courseId);
+        }
     }
 }

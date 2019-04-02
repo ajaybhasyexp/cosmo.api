@@ -40,5 +40,14 @@ namespace COSMO.Data.Repositories
                 return conn.Query<CourseFee>("getcoursefee", new { branchId = branchId }, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+
+        public List<CourseFee> GetCourseFee(int branchId, int courseId)
+        {
+            using (IDbConnection conn = Connection)
+            {
+                return conn.Query<CourseFee>("getfeestructureforbranchcourse", new { branchid = branchId, courseid = courseId },
+                    commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
     }
 }

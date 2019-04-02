@@ -58,6 +58,38 @@ namespace COSMO.API.Controllers
             return response;
         }
 
+        [HttpGet]
+        [Route("all/{branchId}")]
+        public ResponseDto<List<CourseFee>> CourseFees(int branchId)
+        {
+            ResponseDto<List<CourseFee>> response = new ResponseDto<List<CourseFee>>(_commonResource);
+            try
+            {
+                response.Data = _courseFeeService.GetAll(branchId);
+            }
+            catch (Exception ex)
+            {
+                return response.HandleException(response);
+            }
+            return response;
+        }
+
+        [HttpGet]
+        [Route("{branchId}/course/{courseId}")]
+        public ResponseDto<List<CourseFee>> CourseFees(int branchId, int courseId)
+        {
+            ResponseDto<List<CourseFee>> response = new ResponseDto<List<CourseFee>>(_commonResource);
+            try
+            {
+                response.Data = _courseFeeService.GetCourseFee(branchId, courseId);
+            }
+            catch (Exception ex)
+            {
+                return response.HandleException(response);
+            }
+            return response;
+        }
+
         /// <summary>
         /// The save/update method for BatchAssignment
         /// </summary>
@@ -97,22 +129,6 @@ namespace COSMO.API.Controllers
                 return response.HandleDeleteException(response, ex);
             }
             return response;
-        }
-
-        [HttpGet]
-        [Route("all/{branchId}")]
-        public ResponseDto<List<CourseFee>> CourseFees(int branchId)
-        {
-            ResponseDto<List<CourseFee>> response = new ResponseDto<List<CourseFee>>(_commonResource);
-            try
-            {
-                response.Data = _courseFeeService.GetAll(branchId);
-            }
-            catch (Exception ex)
-            {
-                return response.HandleException(response);
-            }
-            return response;
-        }
+        }        
     }
 }
