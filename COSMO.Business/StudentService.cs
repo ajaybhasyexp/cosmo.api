@@ -34,5 +34,20 @@ namespace COSMO.Business
         {
             return _studentRespository.GetAll();
         }
+
+        public List<Source> GetSources()
+        {
+            return _studentRespository.GetSources();
+        }
+
+        public List<Qualification> GetQualifications()
+        {
+            return _studentRespository.GetQualifications();
+        }
+
+        public List<Profession> GetProfessions()
+        {
+            return _studentRespository.GetProfessions();
+        }
     }
 }

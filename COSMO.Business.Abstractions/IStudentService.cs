@@ -10,6 +10,12 @@ namespace COSMO.Business.Abstractions
         Student Save(Student student);
 
         List<Student> GetAll();
-        
+
+        List<Source> GetSources();
+
+        List<Qualification> GetQualifications();
+
+        List<Profession> GetProfessions();
+
     }
 }

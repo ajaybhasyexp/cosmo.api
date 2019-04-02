@@ -10,7 +10,7 @@ namespace COSMO.API
 
         public string Message { get; set; }
 
-        public ICommonResource _commonResource { get; set; }
+        private ICommonResource _commonResource { get; set; }
 
         public ResponseDto(ICommonResource commonResource)
         {

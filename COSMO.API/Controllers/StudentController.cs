@@ -54,6 +54,57 @@ namespace COSMO.API.Controllers
 
         }
 
+        [HttpGet]
+        [Route("sources")]
+        public ResponseDto<List<Source>> GetSources()
+        {
+            ResponseDto<List<Source>> response = new ResponseDto<List<Source>>(_commonResource);
+            try
+            {
+                response.Data = _studentService.GetSources();
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("qualifications")]
+        public ResponseDto<List<Qualification>> GetQualifications()
+        {
+            ResponseDto<List<Qualification>> response = new ResponseDto<List<Qualification>>(_commonResource);
+            try
+            {
+                response.Data = _studentService.GetQualifications();
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("professions")]
+        public ResponseDto<List<Profession>> GetProfessions()
+        {
+            ResponseDto<List<Profession>> response = new ResponseDto<List<Profession>>(_commonResource);
+            try
+            {
+                response.Data = _studentService.GetProfessions();
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+
+        }
+
         /// <summary>
         /// The save/update method for branch
         /// </summary>
