@@ -8,6 +8,8 @@ namespace COSMO.Business.Abstractions
     public interface IStudentService
     {
         Student Save(Student student);
+
+        List<Student> GetAll();
         
     }
 }

@@ -38,6 +38,22 @@ namespace COSMO.API.Controllers
             _commonResource = commonResource;
         }
 
+        [HttpGet]
+        public ResponseDto<List<Student>> GetAll()
+        {
+            ResponseDto<List<Student>> response = new ResponseDto<List<Student>>(_commonResource);
+            try
+            {
+                response.Data = _studentService.GetAll();
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+
+        }
+
         /// <summary>
         /// The save/update method for branch
         /// </summary>
