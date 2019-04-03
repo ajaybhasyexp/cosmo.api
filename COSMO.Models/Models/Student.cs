@@ -12,20 +12,24 @@ namespace COSMO.Models.Models
 
         public string Address { get; set; }
 
+        public string Gender { get; set; }
+
+        public int BranchId { get; set; }        
+
         public int? QualificationId { get; set; }
 
         [Write(false)]
-        public string Qualification { get; set; }
+        public string QualificationName { get; set; }
 
         public int? ProfessionId { get; set; }
 
         [Write(false)]
-        public string Profession { get; set; }
+        public string ProfessionName { get; set; }
 
         public int? SourceId { get; set; }
 
         [Write(false)]
-        public string Source { get; set; }
+        public string SourceName { get; set; }
 
         public bool FeesPaid { get; set; }
     }
