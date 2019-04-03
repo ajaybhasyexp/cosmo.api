@@ -9,7 +9,7 @@ namespace COSMO.Business.Abstractions
     {
         Student Save(Student student);
 
-        List<Student> GetAll();
+        List<Student> GetAll(int branchId);
 
         List<Source> GetSources();
 

@@ -1,8 +1,8 @@
 USE `heroku_b33cb002ba86bd2`;DROP PROCEDURE 
-IF EXISTS `getcoursefee`;DELIMITER $$ 
+IF EXISTS `getStudents`;DELIMITER $$ 
   USE `heroku_b33cb002ba86bd2`$$ 
   CREATE PROCEDURE 
-    `getcoursefee` (IN branchid INT) 
+    `getStudents` (IN branchid INT) 
   begin 
     IF ( branchid <> 0 ) THEN 
       SELECT     s.*, 

@@ -1,5 +1,6 @@
 ﻿using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
+using Dapper;
 using Dapper.Contrib.Extensions;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
@@ -36,7 +37,11 @@ namespace COSMO.Data.Repositories
 
         public List<Student> GetAllVM(int branchId)
         {
-            throw new NotImplementedException();
+            using (IDbConnection conn = Connection)
+            {
+                return conn.Query<Student>("getStudents", new { branchid = branchId },
+                commandType: CommandType.StoredProcedure).ToList();
+            }
         }
 
         public List<Source> GetSources()

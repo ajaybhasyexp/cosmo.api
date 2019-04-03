@@ -30,9 +30,9 @@ namespace COSMO.Business
             return _studentRespository.Save(student);
         }
 
-        public List<Student> GetAll()
+        public List<Student> GetAll(int branchId)
         {
-            return _studentRespository.GetAll();
+            return _studentRespository.GetAllVM(branchId);
         }
 
         public List<Source> GetSources()

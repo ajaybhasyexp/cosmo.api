@@ -199,7 +199,7 @@ CREATE TABLE `StudentAssignments` (
   `BatchAssignId` INTEGER NOT NULL,
   `StudentId` INTEGER NOT NULL,
   `CourseFeeId` INTEGER NOT NULL,
-  `ReceiptId` INTEGER NOT NULL,
+  `ReceiptId` INTEGER NULL DEFAULT NULL,
   `CreatedBy` INTEGER NULL DEFAULT NULL,
   `UpdatedBy` INTEGER NULL DEFAULT NULL,
   `CreatedDate` DATETIME NOT NULL,
