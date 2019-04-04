@@ -39,7 +39,7 @@ namespace COSMO.API.Controllers
         }
 
         [HttpGet]
-        [Route("branchId")]
+        [Route("{branchId}")]
         public ResponseDto<List<Student>> GetAll([FromRoute] int branchId)
         {
             ResponseDto<List<Student>> response = new ResponseDto<List<Student>>(_commonResource);
