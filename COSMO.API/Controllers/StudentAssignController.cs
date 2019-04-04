@@ -48,7 +48,7 @@ namespace COSMO.API.Controllers
                 response.Data = _studentAssignmentService.GetAllVM(branchId);
                 return response;
             }
-            catch
+            catch(Exception ex)
             {
                 return response.HandleException(response);
             }

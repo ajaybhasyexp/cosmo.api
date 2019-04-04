@@ -11,6 +11,8 @@ namespace COSMO.Business.Abstractions
 
         List<Student> GetAll(int branchId);
 
+        Student Get(int studentId);
+
         List<Source> GetSources();
 
         List<Qualification> GetQualifications();

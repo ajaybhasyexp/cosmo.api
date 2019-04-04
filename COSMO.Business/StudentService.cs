@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using COSMO.Business.Abstractions;
+﻿using COSMO.Business.Abstractions;
 using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
+using System.Collections.Generic;
 
 namespace COSMO.Business
 {
@@ -28,6 +28,11 @@ namespace COSMO.Business
         public Student Save(Student student)
         {
             return _studentRespository.Save(student);
+        }
+
+        public Student Get(int studentId)
+        {
+            return _studentRespository.Get(studentId);
         }
 
         public List<Student> GetAll(int branchId)

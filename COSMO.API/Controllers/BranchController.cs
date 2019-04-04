@@ -2,6 +2,7 @@
 using COSMO.Business.Abstractions;
 using COSMO.Models.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace COSMO.API.Controllers
@@ -75,7 +76,7 @@ namespace COSMO.API.Controllers
             {
                 return response.HandleException(response);
             }
-            
+
         }
 
         /// <summary>
@@ -111,9 +112,9 @@ namespace COSMO.API.Controllers
                 _branchServive.Delete(branch);
                 return response;
             }
-            catch
+            catch (Exception ex)
             {
-                return response.HandleException(response);
+                return response.HandleDeleteException(response, ex);
             }
         }
     }
