@@ -26,7 +26,7 @@ namespace COSMO.Business
 
         public List<StudentAssignment> GetAllVM(int branchId)
         {
-            throw new NotImplementedException();
+            return _studentAssignmentRepository.GetAllVM(branchId);
         }
 
         public StudentAssignment Save(StudentAssignment studentAssignment)
