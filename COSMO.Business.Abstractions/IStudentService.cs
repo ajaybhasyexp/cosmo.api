@@ -19,5 +19,7 @@ namespace COSMO.Business.Abstractions
 
         List<Profession> GetProfessions();
 
+        void Delete(Student student);
+
     }
 }

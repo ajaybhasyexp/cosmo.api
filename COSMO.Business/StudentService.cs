@@ -54,5 +54,10 @@ namespace COSMO.Business
         {
             return _studentRespository.GetProfessions();
         }
+
+        public void Delete(Student student)
+        {
+            _studentRespository.Delete(student);
+        }
     }
 }

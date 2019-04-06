@@ -142,5 +142,21 @@ namespace COSMO.API.Controllers
                 return response.HandleException(response);
             }
         }
+
+        [HttpDelete]
+        public ResponseDto<bool> Delete([FromBody] Student student)
+        {
+            ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
+            try
+            {
+                _studentService.Delete(student);
+                response.Data = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return response.HandleDeleteException(response, ex);
+            }
+        }
     }
 }
