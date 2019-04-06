@@ -75,6 +75,7 @@ namespace COSMO.API.Controllers
             }
         }
 
+        [HttpDelete]
         public ResponseDto<bool> Delete([FromBody] StudentAssignment assign)
         {
             ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
