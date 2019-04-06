@@ -60,7 +60,7 @@ namespace COSMO.API.Controllers
         /// </summary>
         /// <param name="branch"></param>
         /// <returns>A saved or updated branch entity.</returns>
-        [HttpPost]        
+        [HttpPost]
         public ResponseDto<StudentAssignment> Save([FromBody]StudentAssignment assign)
         {
             ResponseDto<StudentAssignment> response = new ResponseDto<StudentAssignment>(_commonResource);
@@ -72,6 +72,21 @@ namespace COSMO.API.Controllers
             catch
             {
                 return response.HandleException(response);
+            }
+        }
+
+        public ResponseDto<bool> Delete([FromBody] StudentAssignment assign)
+        {
+            ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
+            try
+            {
+                _studentAssignmentService.Delete(assign);
+                response.Data = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return response.HandleDeleteException(response, ex);
             }
         }
     }

@@ -10,5 +10,7 @@ namespace COSMO.Business.Abstractions
         StudentAssignment Save(StudentAssignment studentAssignment);
 
         List<StudentAssignment> GetAllVM(int branchId);
+
+        void Delete(StudentAssignment assign);
     }
 }

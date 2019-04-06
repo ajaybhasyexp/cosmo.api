@@ -33,5 +33,10 @@ namespace COSMO.Business
         {
             return _studentAssignmentRepository.Save(studentAssignment);
         }
+
+        public void Delete(StudentAssignment assign)
+        {
+            _studentAssignmentRepository.Delete(assign);
+        }
     }
 }
