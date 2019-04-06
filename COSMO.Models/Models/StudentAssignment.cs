@@ -13,6 +13,15 @@ namespace COSMO.Models.Models
         public int? ReceiptId { get; set; }
 
         [Write(false)]
+        public int CourseId { get; set; }
+
+        [Write(false)]
+        public int BatchId { get; set; }
+
+        [Write(false)]
+        public int BranchId { get; set; }
+
+        [Write(false)]
         public string StudentName { get; set; }
 
         [Write(false)]

@@ -1,6 +1,7 @@
 ﻿using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
 using Dapper;
+using Dapper.Contrib.Extensions;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System;
@@ -40,6 +41,36 @@ namespace COSMO.Data.Repositories
             {
                 return conn.Query<StudentAssignment>("getStudentAssignments", new { branchid = branchId },
                 commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
+        public new StudentAssignment Save(StudentAssignment studentAssignment)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                if (studentAssignment.Id == 0)
+                {
+                    studentAssignment.CreatedDate = DateTime.Now;
+                    studentAssignment.UpdatedDate = DateTime.Now;
+                    if(studentAssignment.BatchAssignId == 0)
+                    {
+                        string query = string.Format(Queries.BatchAssignmentFetch, studentAssignment.CourseId, studentAssignment.BatchId, studentAssignment.BranchId);
+                        var assignment = conn.QueryFirstOrDefault<BatchAssignment>(query);
+                        if(assignment != null)
+                        {
+                            studentAssignment.BatchAssignId = assignment.Id;
+                        }
+                    }
+                    conn.Insert(studentAssignment);
+                }
+                else
+                {
+                    studentAssignment.UpdatedDate = DateTime.Now;
+                    conn.Update(studentAssignment);
+                }
+
+                return studentAssignment;
             }
         }
     }

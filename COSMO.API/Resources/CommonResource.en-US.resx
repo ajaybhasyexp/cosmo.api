@@ -120,6 +120,9 @@
   <data name="BatchAssignmentExists" xml:space="preserve">
     <value>A batch assignment already exists</value>
   </data>
+  <data name="EntityAssignmentExists" xml:space="preserve">
+    <value>An assignment already exists so cannot delete.</value>
+  </data>
   <data name="InvalidUser" xml:space="preserve">
     <value>Username or password is incorrect</value>
   </data>
