@@ -41,5 +41,10 @@ namespace COSMO.Business
         {
             return _branchRepository.GetAssignedBatches(branchId, courseId);
         }
+
+        public void Delete(Batch batch)
+        {
+            _branchRepository.Delete(batch);
+        }
     }
 }

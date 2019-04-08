@@ -26,5 +26,7 @@ namespace COSMO.Business.Abstractions
         Batch Get(int id);
 
         List<Batch> GetAssigned(int branchId, int courseId);
+
+        void Delete(Batch batch);
     }
 }

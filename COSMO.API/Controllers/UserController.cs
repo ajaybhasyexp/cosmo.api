@@ -3,6 +3,7 @@ using COSMO.Business.Abstractions;
 using COSMO.Models.UserModule;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace COSMO.API.Controllers
@@ -51,7 +52,7 @@ namespace COSMO.API.Controllers
             catch
             {
                 return response.HandleException(response);
-            }           
+            }
 
         }
 
@@ -78,6 +79,22 @@ namespace COSMO.API.Controllers
             try
             {
                 response.Data = _userService.GetAll();
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+        }
+
+        [HttpGet]
+        [Route("{branchId}/all")]
+        public ResponseDto<List<User>> GetAll(int branchId)
+        {
+            ResponseDto<List<User>> response = new ResponseDto<List<User>>(_commonResource);
+            try
+            {
+                response.Data = _userService.GetAll(branchId);
                 return response;
             }
             catch
@@ -127,9 +144,9 @@ namespace COSMO.API.Controllers
                 _userService.Delete(user);
                 return response;
             }
-            catch
+            catch (Exception ex)
             {
-                return response.HandleException(response);
+                return response.HandleDeleteException(response, ex);
             }
         }
 

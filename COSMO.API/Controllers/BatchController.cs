@@ -68,11 +68,11 @@ namespace COSMO.API.Controllers
                 response.Data = _batchService.GetAssigned(branchId, courseId);
                 return response;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return response.HandleException(response);
             }
-          
+
         }
 
         /// <summary>
@@ -114,6 +114,21 @@ namespace COSMO.API.Controllers
             catch
             {
                 return response.HandleException(response);
+            }
+        }
+
+        [HttpDelete]
+        public ResponseDto<bool> Delete([FromBody] Batch batch)
+        {
+            ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
+            try
+            {
+                _batchService.Delete(batch);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return response.HandleDeleteException(response, ex);
             }
         }
     }

@@ -11,8 +11,24 @@ namespace COSMO.Business.Abstractions
     {
         User Authenticate(string username, string password);
 
+        /// <summary>
+        /// Gets all the user from DB.
+        /// </summary>
+        /// <returns></returns>
         List<User> GetAll();
 
+        /// <summary>
+        /// Gets all the user vms.
+        /// </summary>
+        /// <param name="branchId"></param>
+        /// <returns></returns>
+        List<User> GetAll(int branchId);
+
+        /// <summary>
+        /// Save a user.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         User Save(User user);
 
         /// <summary>

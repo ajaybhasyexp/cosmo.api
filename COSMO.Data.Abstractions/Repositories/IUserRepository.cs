@@ -1,5 +1,5 @@
 ﻿using COSMO.Models.UserModule;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace COSMO.Data.Abstractions.Repositories
 {
@@ -16,6 +16,13 @@ namespace COSMO.Data.Abstractions.Repositories
         /// <param name="password">The password of the user.</param>
         /// <returns>A user object.</returns>
         User GetUser(string userName, string password);
+
+        /// <summary>
+        /// Gets all the users or based on branch id.
+        /// </summary>
+        /// <param name="branchId">The branch identfier.</param>
+        /// <returns>A list of user object with branch name and userrole name.</returns>
+        List<User> GetAll(int branchId);
 
     }
 }

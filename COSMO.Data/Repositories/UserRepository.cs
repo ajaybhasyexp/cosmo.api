@@ -3,6 +3,7 @@ using COSMO.Models.UserModule;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
@@ -55,6 +56,14 @@ namespace COSMO.Data.Repositories
                 conn.Open();
                 var result = conn.Query<User>(sqlQuery);
                 return result.FirstOrDefault();
+            }
+        }
+
+        public List<User> GetAll(int branchId)
+        {
+            using (IDbConnection conn = Connection)
+            {
+                return conn.Query<User>("getusers", new { branchid = branchId }, commandType: CommandType.StoredProcedure).ToList();
             }
         }
     }

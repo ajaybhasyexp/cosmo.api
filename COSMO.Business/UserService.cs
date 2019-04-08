@@ -98,6 +98,11 @@ namespace COSMO.Business
             return _userRepository.GetAll();
         }
 
+        public List<User> GetAll(int branchId)
+        {
+            return _userRepository.GetAll(branchId);
+        }
+
         /// <summary>
         /// Saves the user entity.
         /// </summary>
@@ -115,6 +120,6 @@ namespace COSMO.Business
         public void Delete(User user)
         {
             _userRepository.Delete(user);
-        }
+        }        
     }
 }
