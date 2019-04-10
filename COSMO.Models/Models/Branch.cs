@@ -1,12 +1,7 @@
-﻿using Dapper.Contrib.Extensions;
-
-namespace COSMO.Models.Models
+﻿namespace COSMO.Models.Models
 {
     public class Branch : Base
     {
-       // [Key]
-       // public int BranchId { get; set; }
-
         public string BranchName { get; set; }
 
         public string BranchAddress { get; set; }
@@ -17,6 +12,5 @@ namespace COSMO.Models.Models
 
         public string BranchEmail { get; set; }
 
-        public int? AdminId { get; set; }
     }
 }

@@ -58,7 +58,6 @@ CREATE TABLE `Branchs` (
   `ContactNumber` VARCHAR(15) NOT NULL,
   `ContactPerson` VARCHAR(100) NULL DEFAULT NULL,
   `BranchEmail` VARCHAR(50) NOT NULL,
-  `AdminId` INTEGER NULL DEFAULT NULL,
   `CreatedDate` DATETIME NOT NULL,
   `UpdatedDate` DATETIME NOT NULL,
   `CreatedBy` INTEGER NULL DEFAULT NULL,
@@ -176,6 +175,8 @@ CREATE TABLE `Students` (
   `ContactNumber` VARCHAR(15) NOT NULL,
   `Email` VARCHAR(100) NOT NULL,
   `Address` VARCHAR(300) NULL DEFAULT NULL,
+  `Gender` VARCHAR NOT NULL,
+  `BranchId` INTEGER NOT NULL,
   `QualificationId` INTEGER NULL DEFAULT NULL,
   `ProfessionId` INTEGER NULL DEFAULT NULL,
   `SourceId` INTEGER NULL DEFAULT NULL,
@@ -240,6 +241,7 @@ CREATE TABLE `Receipts` (
   `AmountPaid` DECIMAL NOT NULL,
   `PaymentMethodId` INTEGER NOT NULL,
   `Reference` VARCHAR(200) NULL DEFAULT NULL,
+  `ReceiptDate` DATETIME NOT NULL,
   `CreatedBy` INTEGER NULL DEFAULT NULL,
   `UpdatedBy` INTEGER NULL DEFAULT NULL,
   `CreatedDate` DATETIME NOT NULL,
@@ -288,7 +290,7 @@ DROP TABLE IF EXISTS `Sources`;
 		
 CREATE TABLE `Sources` (
   `Id` INTEGER NOT NULL AUTO_INCREMENT,
-  `Source` VARCHAR(250) NULL,
+  `Source` VARCHAR(250) NULL DEFAULT NULL,
   PRIMARY KEY (`Id`)
 );
 
@@ -306,12 +308,93 @@ CREATE TABLE `Qualifications` (
 );
 
 -- ---
+-- Table 'Enquiry'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Enquiry`;
+		
+CREATE TABLE `Enquiry` (
+  `Id` INTEGER NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(250) NOT NULL,
+  `ContactNumber` VARCHAR NOT NULL,
+  `Address` VARCHAR NOT NULL,
+  `CourseId` INTEGER NULL DEFAULT NULL,
+  `BranchId` INTEGER NOT NULL,
+  `Remarks` VARCHAR NOT NULL,
+  `CreatedBy` INTEGER NULL DEFAULT NULL,
+  `UpdatedBy` INTEGER NULL DEFAULT NULL,
+  `CreatedDate` DATETIME NOT NULL,
+  `UpdatedDate` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`)
+);
+
+-- ---
+-- Table 'ExpenseHead'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `ExpenseHead`;
+		
+CREATE TABLE `ExpenseHead` (
+  `Id` INTEGER NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(250) NOT NULL,
+  `Description` VARCHAR NOT NULL,
+  `CreatedBy` INTEGER NULL DEFAULT NULL,
+  `UpdatedBy` INTEGER NULL DEFAULT NULL,
+  `CreatedDate` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`)
+);
+
+-- ---
+-- Table 'Expense'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Expense`;
+		
+CREATE TABLE `Expense` (
+  `Id` INTEGER NOT NULL AUTO_INCREMENT,
+  `Description` VARCHAR NOT NULL,
+  `ExpenseHeadId` INTEGER NOT NULL,
+  `Amount` DECIMAL NOT NULL,
+  `Reference` VARCHAR NULL DEFAULT NULL,
+  `BranchId` INTEGER NOT NULL,
+  PRIMARY KEY (`Id`)
+);
+
+-- ---
+-- Table 'IncomeHead'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `IncomeHead`;
+		
+CREATE TABLE `IncomeHead` (
+  `Id` INTEGER NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR NOT NULL,
+  `Description` VARCHAR NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+);
+
+-- ---
+-- Table 'Income'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Income`;
+		
+CREATE TABLE `Income` (
+  `Id` INTEGER NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`Id`)
+);
+
+-- ---
 -- Foreign Keys 
 -- ---
 
 ALTER TABLE `Users` ADD FOREIGN KEY (BranchId) REFERENCES `Branchs` (`Id`);
 ALTER TABLE `Users` ADD FOREIGN KEY (UserRoleId) REFERENCES `UserRoles` (`Id`);
-ALTER TABLE `Branchs` ADD FOREIGN KEY (AdminId) REFERENCES `Users` (`Id`);
 ALTER TABLE `Courses` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
 ALTER TABLE `Courses` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
 ALTER TABLE `Batchs` ADD FOREIGN KEY (BranchId) REFERENCES `Branchs` (`Id`);
@@ -352,6 +435,12 @@ ALTER TABLE `Receipts` ADD FOREIGN KEY (BranchId) REFERENCES `Branchs` (`Id`);
 ALTER TABLE `PaymentMethods` ADD FOREIGN KEY (BranchId) REFERENCES `Branchs` (`Id`);
 ALTER TABLE `PaymentMethods` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
 ALTER TABLE `PaymentMethods` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `Enquiry` ADD FOREIGN KEY (CourseId) REFERENCES `Courses` (`Id`);
+ALTER TABLE `Enquiry` ADD FOREIGN KEY (BranchId) REFERENCES `Branchs` (`Id`);
+ALTER TABLE `Enquiry` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `Enquiry` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `Expense` ADD FOREIGN KEY (ExpenseHeadId) REFERENCES `ExpenseHead` (`Id`);
+ALTER TABLE `Expense` ADD FOREIGN KEY (BranchId) REFERENCES `Branchs` (`Id`);
 
 -- ---
 -- Table Properties
@@ -370,9 +459,14 @@ ALTER TABLE `PaymentMethods` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id
 -- ALTER TABLE `CourseFees` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- ALTER TABLE `Receipts` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- ALTER TABLE `PaymentMethods` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Profession` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Source` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Qualification` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Professions` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Sources` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Qualifications` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Enquiry` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `ExpenseHead` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Expense` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `IncomeHead` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Income` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ---
 -- Test Data
@@ -382,8 +476,8 @@ ALTER TABLE `PaymentMethods` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id
 -- ('','','','','','','','','','','');
 -- INSERT INTO `UserRoles` (`Id`,`UserRole`,`CreatedDate`,`UpdatedDate`,`CreatedBy`,`UpdatedBy`) VALUES
 -- ('','','','','','');
--- INSERT INTO `Branchs` (`Id`,`BranchName`,`BranchAddress`,`ContactNumber`,`ContactPerson`,`BranchEmail`,`AdminId`,`CreatedDate`,`UpdatedDate`,`CreatedBy`,`UpdatedBy`,`IsMain`) VALUES
--- ('','','','','','','','','','','','');
+-- INSERT INTO `Branchs` (`Id`,`BranchName`,`BranchAddress`,`ContactNumber`,`ContactPerson`,`BranchEmail`,`CreatedDate`,`UpdatedDate`,`CreatedBy`,`UpdatedBy`,`IsMain`) VALUES
+-- ('','','','','','','','','','','');
 -- INSERT INTO `Courses` (`Id`,`CourseName`,`Description`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
 -- ('','','','','','','');
 -- INSERT INTO `Batchs` (`Id`,`BatchName`,`Description`,`BranchId`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
@@ -394,19 +488,29 @@ ALTER TABLE `PaymentMethods` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id
 -- ('','','','','','','','','','','');
 -- INSERT INTO `StaffRoles` (`Id`,`StaffRole`,`Description`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
 -- ('','','','','','','');
--- INSERT INTO `Students` (`Id`,`StudentName`,`ContactNumber`,`Email`,`Address`,`QualificationId`,`ProfessionId`,`SourceId`,`FeesPaid`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
--- ('','','','','','','','','','','','','');
+-- INSERT INTO `Students` (`Id`,`StudentName`,`ContactNumber`,`Email`,`Address`,`Gender`,`BranchId`,`QualificationId`,`ProfessionId`,`SourceId`,`FeesPaid`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
+-- ('','','','','','','','','','','','','','','');
 -- INSERT INTO `StudentAssignments` (`Id`,`BatchAssignId`,`StudentId`,`CourseFeeId`,`ReceiptId`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
 -- ('','','','','','','','','');
 -- INSERT INTO `CourseFees` (`Id`,`FeeStructure`,`Amount`,`CourseId`,`BranchId`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`,`Credits`) VALUES
 -- ('','','','','','','','','','');
--- INSERT INTO `Receipts` (`Id`,`AmountPaid`,`PaymentMethodId`,`Reference`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`,`BranchId`) VALUES
--- ('','','','','','','','','');
+-- INSERT INTO `Receipts` (`Id`,`AmountPaid`,`PaymentMethodId`,`Reference`,`ReceiptDate`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`,`BranchId`) VALUES
+-- ('','','','','','','','','','');
 -- INSERT INTO `PaymentMethods` (`Id`,`PaymentMethod`,`BranchId`,`CreatedDate`,`UpdatedDate`,`CreatedBy`,`UpdatedBy`) VALUES
 -- ('','','','','','','');
--- INSERT INTO `Profession` (`Id`,`Profession`) VALUES
+-- INSERT INTO `Professions` (`Id`,`Profession`) VALUES
 -- ('','');
--- INSERT INTO `Source` (`Id`,`Source`) VALUES
+-- INSERT INTO `Sources` (`Id`,`Source`) VALUES
 -- ('','');
--- INSERT INTO `Qualification` (`Id`,`Qualification`) VALUES
+-- INSERT INTO `Qualifications` (`Id`,`Qualification`) VALUES
 -- ('','');
+-- INSERT INTO `Enquiry` (`Id`,`Name`,`ContactNumber`,`Address`,`CourseId`,`BranchId`,`Remarks`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
+-- ('','','','','','','','','','','');
+-- INSERT INTO `ExpenseHead` (`Id`,`Name`,`Description`,`CreatedBy`,`UpdatedBy`,`CreatedDate`) VALUES
+-- ('','','','','','');
+-- INSERT INTO `Expense` (`Id`,`Description`,`ExpenseHeadId`,`Amount`,`Reference`,`BranchId`) VALUES
+-- ('','','','','','');
+-- INSERT INTO `IncomeHead` (`Id`,`Name`,`Description`) VALUES
+-- ('','','');
+-- INSERT INTO `Income` (`Id`) VALUES
+-- ('');

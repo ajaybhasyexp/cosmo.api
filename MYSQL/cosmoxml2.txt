@@ -119,10 +119,6 @@
 <row name="BranchEmail" null="0" autoincrement="0">
 <datatype>VARCHAR(50)</datatype>
 </row>
-<row name="AdminId" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Users" row="Id" />
-</row>
 <row name="CreatedDate" null="0" autoincrement="0">
 <datatype>DATETIME</datatype>
 </row>
@@ -378,9 +374,9 @@
 <datatype>INTEGER</datatype>
 <relation table="CourseFees" row="Id" />
 </row>
-<row name="ReceiptId" null="0" autoincrement="0">
+<row name="ReceiptId" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<relation table="Receipts" row="Id" />
+<default>NULL</default><relation table="Receipts" row="Id" />
 </row>
 <row name="CreatedBy" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
