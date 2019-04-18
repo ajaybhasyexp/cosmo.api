@@ -545,10 +545,10 @@
 <datatype>VARCHAR(250)</datatype>
 </row>
 <row name="ContactNumber" null="0" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(15)</datatype>
 </row>
 <row name="Address" null="0" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(250)</datatype>
 </row>
 <row name="CourseId" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
@@ -559,7 +559,7 @@
 <relation table="Branchs" row="Id" />
 </row>
 <row name="Remarks" null="0" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(250)</datatype>
 </row>
 <row name="CreatedBy" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
@@ -579,7 +579,7 @@
 <part>Id</part>
 </key>
 </table>
-<table x="487" y="693" name="ExpenseHead">
+<table x="394" y="951" name="ExpenseHead">
 <row name="Id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 </row>
@@ -587,15 +587,20 @@
 <datatype>VARCHAR(250)</datatype>
 </row>
 <row name="Description" null="0" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(500)</datatype>
 </row>
 <row name="CreatedBy" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="Users" row="Id" />
+</row>
 <row name="UpdatedBy" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="Users" row="Id" />
+</row>
 <row name="CreatedDate" null="0" autoincrement="0">
+<datatype>DATETIME</datatype>
+</row>
+<row name="UpdatedDate" null="0" autoincrement="0">
 <datatype>DATETIME</datatype>
 </row>
 <key type="PRIMARY" name="">
@@ -607,7 +612,7 @@
 <datatype>INTEGER</datatype>
 </row>
 <row name="Description" null="0" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(500)</datatype>
 </row>
 <row name="ExpenseHeadId" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
@@ -617,33 +622,92 @@
 <datatype>DECIMAL</datatype>
 </row>
 <row name="Reference" null="1" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(100)</datatype>
 <default>NULL</default></row>
 <row name="BranchId" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <relation table="Branchs" row="Id" />
 </row>
+<row name="CreatedBy" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Users" row="Id" />
+</row>
+<row name="UpdatedBy" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Users" row="Id" />
+</row>
+<row name="CreatedDate" null="0" autoincrement="0">
+<datatype>DATETIME</datatype>
+</row>
+<row name="UpdatedBy" null="0" autoincrement="0">
+<datatype>DATETIME</datatype>
+</row>
 <key type="PRIMARY" name="">
 <part>Id</part>
 </key>
 </table>
-<table x="302" y="685" name="IncomeHead">
+<table x="431" y="677" name="IncomeHead">
 <row name="Id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 </row>
 <row name="Name" null="0" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(250)</datatype>
 </row>
 <row name="Description" null="1" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(500)</datatype>
 <default>NULL</default></row>
+<row name="CreatedBy" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Users" row="Id" />
+</row>
+<row name="UpdatedBy" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Users" row="Id" />
+</row>
+<row name="CreatedDate" null="0" autoincrement="0">
+<datatype>DATETIME</datatype>
+</row>
+<row name="UpdatedDate" null="0" autoincrement="0">
+<datatype>DATETIME</datatype>
+</row>
 <key type="PRIMARY" name="">
 <part>Id</part>
 </key>
 </table>
-<table x="326" y="813" name="Income">
+<table x="74" y="855" name="Income">
 <row name="Id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
+</row>
+<row name="Description" null="0" autoincrement="0">
+<datatype>VARCHAR(250)</datatype>
+</row>
+<row name="IncomeHeadId" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="IncomeHead" row="Id" />
+</row>
+<row name="Amount" null="0" autoincrement="0">
+<datatype>DECIMAL</datatype>
+<default>0</default></row>
+<row name="Reference" null="1" autoincrement="0">
+<datatype>VARCHAR(100)</datatype>
+<default>NULL</default></row>
+<row name="BranchId" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="Branchs" row="Id" />
+</row>
+<row name="CreatedBy" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Users" row="Id" />
+</row>
+<row name="UpdatedBy" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Users" row="Id" />
+</row>
+<row name="CreatedDate" null="0" autoincrement="0">
+<datatype>DATETIME</datatype>
+</row>
+<row name="UpdatedDate" null="0" autoincrement="0">
+<datatype>DATETIME</datatype>
 </row>
 <key type="PRIMARY" name="">
 <part>Id</part>
