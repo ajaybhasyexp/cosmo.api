@@ -639,7 +639,7 @@
 <row name="CreatedDate" null="0" autoincrement="0">
 <datatype>DATETIME</datatype>
 </row>
-<row name="UpdatedBy" null="0" autoincrement="0">
+<row name="UpdatedDate" null="0" autoincrement="0">
 <datatype>DATETIME</datatype>
 </row>
 <key type="PRIMARY" name="">

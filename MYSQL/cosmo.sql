@@ -317,11 +317,11 @@ DROP TABLE IF EXISTS `Enquiry`;
 CREATE TABLE `Enquiry` (
   `Id` INTEGER NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(250) NOT NULL,
-  `ContactNumber` VARCHAR NOT NULL,
-  `Address` VARCHAR NOT NULL,
+  `ContactNumber` VARCHAR(15) NOT NULL,
+  `Address` VARCHAR(250) NOT NULL,
   `CourseId` INTEGER NULL DEFAULT NULL,
   `BranchId` INTEGER NOT NULL,
-  `Remarks` VARCHAR NOT NULL,
+  `Remarks` VARCHAR(250) NOT NULL,
   `CreatedBy` INTEGER NULL DEFAULT NULL,
   `UpdatedBy` INTEGER NULL DEFAULT NULL,
   `CreatedDate` DATETIME NOT NULL,
@@ -339,10 +339,11 @@ DROP TABLE IF EXISTS `ExpenseHead`;
 CREATE TABLE `ExpenseHead` (
   `Id` INTEGER NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(250) NOT NULL,
-  `Description` VARCHAR NOT NULL,
+  `Description` VARCHAR(500) NOT NULL,
   `CreatedBy` INTEGER NULL DEFAULT NULL,
   `UpdatedBy` INTEGER NULL DEFAULT NULL,
   `CreatedDate` DATETIME NOT NULL,
+  `UpdatedDate` DATETIME NOT NULL,
   PRIMARY KEY (`Id`)
 );
 
@@ -355,11 +356,15 @@ DROP TABLE IF EXISTS `Expense`;
 		
 CREATE TABLE `Expense` (
   `Id` INTEGER NOT NULL AUTO_INCREMENT,
-  `Description` VARCHAR NOT NULL,
+  `Description` VARCHAR(500) NOT NULL,
   `ExpenseHeadId` INTEGER NOT NULL,
   `Amount` DECIMAL NOT NULL,
-  `Reference` VARCHAR NULL DEFAULT NULL,
+  `Reference` VARCHAR(100) NULL DEFAULT NULL,
   `BranchId` INTEGER NOT NULL,
+  `CreatedBy` INTEGER NULL DEFAULT NULL,
+  `UpdatedBy` INTEGER NULL DEFAULT NULL,
+  `CreatedDate` DATETIME NOT NULL,
+  `UpdatedDate` DATETIME NOT NULL,
   PRIMARY KEY (`Id`)
 );
 
@@ -372,8 +377,12 @@ DROP TABLE IF EXISTS `IncomeHead`;
 		
 CREATE TABLE `IncomeHead` (
   `Id` INTEGER NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR NOT NULL,
-  `Description` VARCHAR NULL DEFAULT NULL,
+  `Name` VARCHAR(250) NOT NULL,
+  `Description` VARCHAR(500) NULL DEFAULT NULL,
+  `CreatedBy` INTEGER NULL DEFAULT NULL,
+  `UpdatedBy` INTEGER NULL DEFAULT NULL,
+  `CreatedDate` DATETIME NOT NULL,
+  `UpdatedDate` DATETIME NOT NULL,
   PRIMARY KEY (`Id`)
 );
 
@@ -386,6 +395,15 @@ DROP TABLE IF EXISTS `Income`;
 		
 CREATE TABLE `Income` (
   `Id` INTEGER NOT NULL AUTO_INCREMENT,
+  `Description` VARCHAR(250) NOT NULL,
+  `IncomeHeadId` INTEGER NOT NULL,
+  `Amount` DECIMAL NOT NULL DEFAULT 0,
+  `Reference` VARCHAR(100) NULL DEFAULT NULL,
+  `BranchId` INTEGER NOT NULL,
+  `CreatedBy` INTEGER NULL DEFAULT NULL,
+  `UpdatedBy` INTEGER NULL DEFAULT NULL,
+  `CreatedDate` DATETIME NOT NULL,
+  `UpdatedDate` DATETIME NOT NULL,
   PRIMARY KEY (`Id`)
 );
 
@@ -439,8 +457,18 @@ ALTER TABLE `Enquiry` ADD FOREIGN KEY (CourseId) REFERENCES `Courses` (`Id`);
 ALTER TABLE `Enquiry` ADD FOREIGN KEY (BranchId) REFERENCES `Branchs` (`Id`);
 ALTER TABLE `Enquiry` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
 ALTER TABLE `Enquiry` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `ExpenseHead` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `ExpenseHead` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
 ALTER TABLE `Expense` ADD FOREIGN KEY (ExpenseHeadId) REFERENCES `ExpenseHead` (`Id`);
 ALTER TABLE `Expense` ADD FOREIGN KEY (BranchId) REFERENCES `Branchs` (`Id`);
+ALTER TABLE `Expense` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `Expense` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `IncomeHead` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `IncomeHead` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `Income` ADD FOREIGN KEY (IncomeHeadId) REFERENCES `IncomeHead` (`Id`);
+ALTER TABLE `Income` ADD FOREIGN KEY (BranchId) REFERENCES `Branchs` (`Id`);
+ALTER TABLE `Income` ADD FOREIGN KEY (CreatedBy) REFERENCES `Users` (`Id`);
+ALTER TABLE `Income` ADD FOREIGN KEY (UpdatedBy) REFERENCES `Users` (`Id`);
 
 -- ---
 -- Table Properties
@@ -506,11 +534,11 @@ ALTER TABLE `Expense` ADD FOREIGN KEY (BranchId) REFERENCES `Branchs` (`Id`);
 -- ('','');
 -- INSERT INTO `Enquiry` (`Id`,`Name`,`ContactNumber`,`Address`,`CourseId`,`BranchId`,`Remarks`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
 -- ('','','','','','','','','','','');
--- INSERT INTO `ExpenseHead` (`Id`,`Name`,`Description`,`CreatedBy`,`UpdatedBy`,`CreatedDate`) VALUES
--- ('','','','','','');
--- INSERT INTO `Expense` (`Id`,`Description`,`ExpenseHeadId`,`Amount`,`Reference`,`BranchId`) VALUES
--- ('','','','','','');
--- INSERT INTO `IncomeHead` (`Id`,`Name`,`Description`) VALUES
--- ('','','');
--- INSERT INTO `Income` (`Id`) VALUES
--- ('');
+-- INSERT INTO `ExpenseHead` (`Id`,`Name`,`Description`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
+-- ('','','','','','','');
+-- INSERT INTO `Expense` (`Id`,`Description`,`ExpenseHeadId`,`Amount`,`Reference`,`BranchId`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedBy`) VALUES
+-- ('','','','','','','','','','');
+-- INSERT INTO `IncomeHead` (`Id`,`Name`,`Description`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
+-- ('','','','','','','');
+-- INSERT INTO `Income` (`Id`,`Description`,`IncomeHeadId`,`Amount`,`Reference`,`BranchId`,`CreatedBy`,`UpdatedBy`,`CreatedDate`,`UpdatedDate`) VALUES
+-- ('','','','','','','','','','');
