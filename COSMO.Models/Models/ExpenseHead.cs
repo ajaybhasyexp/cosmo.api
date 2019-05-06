@@ -1,6 +1,6 @@
 ﻿namespace COSMO.Models.Models
 {
-    public class IncomeHead : Base
+    public class ExpenseHead : Base
     {
         public string Name { get; set; }
 
