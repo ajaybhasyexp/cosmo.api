@@ -1,4 +1,5 @@
-﻿using COSMO.Data.Abstractions.Repositories;
+﻿using COSMO.Business.Abstractions;
+using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace COSMO.Business
 {
-    public class IncomeHeadService
+    public class IncomeHeadService: IIncomeHeadService
     {
         #region Private Members
 
@@ -36,6 +37,11 @@ namespace COSMO.Business
         public IncomeHead Save(IncomeHead incomeHead)
         {
             return _incomeHeadRepository.Save(incomeHead);
+        }
+
+        public void Delete(IncomeHead incomeHead)
+        {
+            _incomeHeadRepository.Delete(incomeHead);
         }
     }
 }

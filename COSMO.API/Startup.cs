@@ -40,6 +40,7 @@ namespace COSMO.API
             services.AddTransient<ICourseFeeRepository, CourseFeeRepository>();
             services.AddTransient<IStudentRespository, StudentRepository>();
             services.AddTransient<IStudentAssignmentRepository, StudentAssignmentRepository>();
+            services.AddTransient<IIncomeHeadRepository, IncomeHeadRepository>();
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBranchService, BranchService>();
@@ -51,6 +52,7 @@ namespace COSMO.API
             services.AddTransient<ICourseFeeService, CourseFeeService>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IStudentAssignmentService, StudentAssignmentService>();
+            services.AddTransient<IIncomeHeadService, IncomeHeadService>();
             services.AddTransient<ICommonResource, CommonResource>();
 
             services.AddLocalization(o => o.ResourcesPath = "Resources");
