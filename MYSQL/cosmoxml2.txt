@@ -537,7 +537,7 @@
 <part>Id</part>
 </key>
 </table>
-<table x="58" y="540" name="Enquiry">
+<table x="58" y="540" name="Enquirys">
 <row name="Id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 </row>
@@ -579,7 +579,7 @@
 <part>Id</part>
 </key>
 </table>
-<table x="394" y="951" name="ExpenseHead">
+<table x="394" y="951" name="ExpenseHeads">
 <row name="Id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 </row>
@@ -607,7 +607,7 @@
 <part>Id</part>
 </key>
 </table>
-<table x="795" y="716" name="Expense">
+<table x="795" y="716" name="Expenses">
 <row name="Id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 </row>
@@ -616,7 +616,7 @@
 </row>
 <row name="ExpenseHeadId" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
-<relation table="ExpenseHead" row="Id" />
+<relation table="ExpenseHeads" row="Id" />
 </row>
 <row name="Amount" null="0" autoincrement="0">
 <datatype>DECIMAL</datatype>
@@ -646,7 +646,7 @@
 <part>Id</part>
 </key>
 </table>
-<table x="431" y="677" name="IncomeHead">
+<table x="433" y="678" name="IncomeHeads">
 <row name="Id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 </row>
@@ -674,7 +674,7 @@
 <part>Id</part>
 </key>
 </table>
-<table x="74" y="855" name="Income">
+<table x="74" y="855" name="Incomes">
 <row name="Id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 </row>
@@ -683,7 +683,7 @@
 </row>
 <row name="IncomeHeadId" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
-<relation table="IncomeHead" row="Id" />
+<relation table="IncomeHeads" row="Id" />
 </row>
 <row name="Amount" null="0" autoincrement="0">
 <datatype>DECIMAL</datatype>
