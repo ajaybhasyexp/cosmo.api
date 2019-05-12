@@ -2,7 +2,7 @@
 
 namespace COSMO.Data.Abstractions.Repositories
 {
-    public interface IIncomeHeadRepository : IGenericRepository<IncomeHead>
+    public interface IExpenseHeadRepository: IGenericRepository<ExpenseHead>
     {
     }
 }

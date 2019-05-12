@@ -10,14 +10,14 @@ namespace COSMO.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IncomeHeadController : ControllerBase
+    public class ExpenseHeadController : ControllerBase
     {
         #region Private members
 
         /// <summary>
         /// The branch service for busines methods.
         /// </summary>
-        private IIncomeHeadService _incomeHeadService { get; set; }
+        private IExpenseHeadService _expenseHeadService { get; set; }
 
         /// <summary>
         /// The common resource file.
@@ -30,9 +30,9 @@ namespace COSMO.API.Controllers
         /// Constructor for injection.
         /// </summary>
         /// <param name="branchServive">The branch service to inject.</param>
-        public IncomeHeadController(IIncomeHeadService incomeHeadService, ICommonResource commonResource)
+        public ExpenseHeadController(IExpenseHeadService expenseHeadService, ICommonResource commonResource)
         {
-            _incomeHeadService = incomeHeadService;
+            _expenseHeadService = expenseHeadService;
             _commonResource = commonResource;
         }
 
@@ -42,12 +42,12 @@ namespace COSMO.API.Controllers
         /// <param name="BatchAssignment"></param>
         /// <returns>A saved or updated BatchAssignment entity.</returns>
         [HttpPost]
-        public ResponseDto<IncomeHead> Save([FromBody]IncomeHead incomeHead)
+        public ResponseDto<ExpenseHead> Save([FromBody]ExpenseHead expenseHead)
         {
-            ResponseDto<IncomeHead> response = new ResponseDto<IncomeHead>(_commonResource);
+            ResponseDto<ExpenseHead> response = new ResponseDto<ExpenseHead>(_commonResource);
             try
             {
-                response.Data = _incomeHeadService.Save(incomeHead);
+                response.Data = _expenseHeadService.Save(expenseHead);
                 return response;
             }
             catch (CosmoBusinessException ex)
@@ -66,12 +66,12 @@ namespace COSMO.API.Controllers
         /// <param name="id">The id for BatchAssignment</param>
         /// <returns>A BatchAssignment entity.</returns>
         [HttpGet]
-        public ResponseDto<List<IncomeHead>> Get()
+        public ResponseDto<List<ExpenseHead>> Get()
         {
-            ResponseDto<List<IncomeHead>> response = new ResponseDto<List<IncomeHead>>(_commonResource);
+            ResponseDto<List<ExpenseHead>> response = new ResponseDto<List<ExpenseHead>>(_commonResource);
             try
             {
-                response.Data = _incomeHeadService.GetAll();
+                response.Data = _expenseHeadService.GetAll();
                 response.IsSuccess = true;
             }
             catch (Exception ex)
@@ -82,16 +82,16 @@ namespace COSMO.API.Controllers
         }
 
         [HttpGet]
-        [Route("{incomeHeadId}")]
-        public ResponseDto<IncomeHead> Get(int incomeHeadId)
+        [Route("{expenseHeadId}")]
+        public ResponseDto<ExpenseHead> Get(int expenseHeadId)
         {
-            ResponseDto<IncomeHead> response = new ResponseDto<IncomeHead>(_commonResource);
+            ResponseDto<ExpenseHead> response = new ResponseDto<ExpenseHead>(_commonResource);
             try
             {
-                response.Data = _incomeHeadService.Get(incomeHeadId);
+                response.Data = _expenseHeadService.Get(expenseHeadId);
                 response.IsSuccess = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return response.HandleException(response);
             }
@@ -99,12 +99,12 @@ namespace COSMO.API.Controllers
         }
 
         [HttpDelete]
-        public ResponseDto<bool> Delete([FromBody] IncomeHead incomeHead)
+        public ResponseDto<bool> Delete([FromBody] ExpenseHead incomeHead)
         {
             ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
             try
             {
-                _incomeHeadService.Delete(incomeHead);
+                _expenseHeadService.Delete(incomeHead);
                 response.Data = true;
                 return response;
             }
@@ -113,5 +113,7 @@ namespace COSMO.API.Controllers
                 return response.HandleDeleteException(response, ex);
             }
         }
+
+
     }
 }
