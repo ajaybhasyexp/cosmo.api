@@ -12,5 +12,7 @@
 
         public int BranchId { get; set; }
 
+        public string IncomeHead { get; set; }
+
     }
 }
