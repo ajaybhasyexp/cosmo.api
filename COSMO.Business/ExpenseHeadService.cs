@@ -34,6 +34,11 @@ namespace COSMO.Business
             _expenseHeadRepository.Delete(expenseHead);
         }
 
+        /// <summary>
+        /// Gets the expense head based on the id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The expense head</returns>
         public ExpenseHead Get(int id)
         {
             return _expenseHeadRepository.Get(id);

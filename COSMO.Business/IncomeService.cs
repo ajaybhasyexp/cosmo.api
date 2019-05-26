@@ -50,6 +50,10 @@ namespace COSMO.Business
             return _incomeRepository.Save(income);
         }
 
+        /// <summary>
+        /// Deletes the income.
+        /// </summary>
+        /// <param name="income"></param>
         public void Delete(Income income)
         {
             _incomeRepository.Delete(income);
