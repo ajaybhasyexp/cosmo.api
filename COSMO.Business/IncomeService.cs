@@ -1,10 +1,11 @@
-﻿using COSMO.Data.Abstractions.Repositories;
+﻿using COSMO.Business.Abstractions;
+using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
 using System.Collections.Generic;
 
 namespace COSMO.Business
 {
-    public class IncomeService
+    public class IncomeService : IIncomeService
     {
         #region Private Members
 
@@ -21,28 +22,37 @@ namespace COSMO.Business
         }
 
         /// <summary>
-        /// Gets a single batchassignment entity.
+        /// Gets a single income entity.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>The batch assignment entity.</returns>
+        /// <returns>The income entity.</returns>
         public Income Get(int id)
         {
             return _incomeRepository.Get(id);
         }
 
+        /// <summary>
+        /// Gets all the income entities
+        /// </summary>
+        /// <returns></returns>
         public List<Income> GetAll()
         {
             return _incomeRepository.GetAll();
         }
 
-        public Income Save(Income assignment)
+        /// <summary>
+        /// Save the income entity.
+        /// </summary>
+        /// <param name="income">The income entity to save.</param>
+        /// <returns>A income entity that has been saved</returns>
+        public Income Save(Income income)
         {
-            return _incomeRepository.Save(assignment);
+            return _incomeRepository.Save(income);
         }
 
-        public void Delete(Income batchAssignment)
+        public void Delete(Income income)
         {
-            _incomeRepository.Delete(batchAssignment);
+            _incomeRepository.Delete(income);
         }
     }
 }

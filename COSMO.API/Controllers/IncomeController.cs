@@ -58,5 +58,20 @@ namespace COSMO.API.Controllers
                 return response.HandleException(response);
             }
         }
+
+        [HttpGet]
+        public ResponseDto<List<Income>> GetAll()
+        {
+            ResponseDto<List<Income>> response = new ResponseDto<List<Income>>(_commonResource);
+            try
+            {
+                response.Data = _incomeService.GetAll();
+                return response;
+            }
+            catch
+            {
+                return response.HandleException(response);
+            }
+        }
     }
 }

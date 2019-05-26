@@ -41,6 +41,8 @@ namespace COSMO.API
             services.AddTransient<IStudentRespository, StudentRepository>();
             services.AddTransient<IStudentAssignmentRepository, StudentAssignmentRepository>();
             services.AddTransient<IIncomeHeadRepository, IncomeHeadRepository>();
+            services.AddTransient<IExpenseHeadRepository, ExpenseHeadRepository>();
+            services.AddTransient<IIncomeRepository, IncomeRepository>();
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBranchService, BranchService>();
@@ -52,6 +54,7 @@ namespace COSMO.API
             services.AddTransient<ICourseFeeService, CourseFeeService>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IStudentAssignmentService, StudentAssignmentService>();
+            services.AddTransient<IIncomeHeadService, IncomeHeadService>();
             services.AddTransient<IIncomeHeadService, IncomeHeadService>();
             services.AddTransient<ICommonResource, CommonResource>();
 
