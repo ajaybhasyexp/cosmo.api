@@ -1,4 +1,6 @@
-﻿namespace COSMO.Models.Models
+﻿using System;
+
+namespace COSMO.Models.Models
 {
     public class Expense: Base
     {
@@ -13,5 +15,9 @@
         public int BranchId { get; set; }
 
         public string ExpenseHead { get; set; }
+
+        public int PaymentModeId { get; set; }
+
+        public DateTime TransDate { get; set; }
     }
 }
