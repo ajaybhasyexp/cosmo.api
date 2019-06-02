@@ -48,7 +48,7 @@ namespace COSMO.API.Controllers
                 response.Data = _expenseService.Save(income);
                 return response;
             }
-            catch
+            catch(Exception ex)
             {
                 return response.HandleException(response);
             }

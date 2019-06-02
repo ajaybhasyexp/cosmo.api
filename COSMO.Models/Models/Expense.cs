@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dapper.Contrib.Extensions;
+using System;
 
 namespace COSMO.Models.Models
 {
@@ -14,6 +15,7 @@ namespace COSMO.Models.Models
 
         public int BranchId { get; set; }
 
+        [Write(false)]
         public string ExpenseHead { get; set; }
 
         public int PaymentModeId { get; set; }
