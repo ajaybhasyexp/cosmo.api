@@ -59,6 +59,7 @@ namespace COSMO.API
             services.AddTransient<IExpenseHeadService, ExpenseHeadService>();
             services.AddTransient<ICommonResource, CommonResource>();
             services.AddTransient<IExpenseService, ExpenseService>();
+            services.AddTransient<IIncomeService, IncomeService>();
 
             services.AddLocalization(o => o.ResourcesPath = "Resources");
             services.Configure<RequestLocalizationOptions>(options =>
