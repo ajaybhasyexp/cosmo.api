@@ -1,9 +1,7 @@
 ﻿using COSMO.Business.Abstractions;
 using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace COSMO.Business
 {
@@ -22,6 +20,15 @@ namespace COSMO.Business
         {
             _studentAssignmentRepository = studentAssignmentRepository;
 
+        }
+
+        /// <summary>
+        /// Gets a list of students whose fees are not paid.
+        /// </summary>
+        /// <returns>A list of students.</returns>
+        public List<Student> GetUnpaidStudents()
+        {
+            return _studentAssignmentRepository.GetUnpaidStudents();
         }
 
         public List<StudentAssignment> GetAllVM(int branchId)

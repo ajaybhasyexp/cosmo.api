@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace COSMO.Data.Repositories
 {
@@ -44,6 +43,18 @@ namespace COSMO.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets the list of students whose fees hasnt been paid.
+        /// </summary>
+        /// <returns>A list of Student objects that has the fees yet to pay.</returns>
+        public List<Student> GetUnpaidStudents()
+        {
+            using (IDbConnection conn = Connection)
+            {
+                return conn.Query<Student>(Queries.GetUnpaidStudents).ToList();
+            }
+        }
+
         public new StudentAssignment Save(StudentAssignment studentAssignment)
         {
             using (var conn = Connection)
@@ -53,11 +64,11 @@ namespace COSMO.Data.Repositories
                 {
                     studentAssignment.CreatedDate = DateTime.Now;
                     studentAssignment.UpdatedDate = DateTime.Now;
-                    if(studentAssignment.BatchAssignId == 0)
+                    if (studentAssignment.BatchAssignId == 0)
                     {
                         string query = string.Format(Queries.BatchAssignmentFetch, studentAssignment.CourseId, studentAssignment.BatchId, studentAssignment.BranchId);
                         var assignment = conn.QueryFirstOrDefault<BatchAssignment>(query);
-                        if(assignment != null)
+                        if (assignment != null)
                         {
                             studentAssignment.BatchAssignId = assignment.Id;
                         }

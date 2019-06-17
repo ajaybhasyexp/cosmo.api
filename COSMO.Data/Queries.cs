@@ -58,5 +58,9 @@
                                                             ON ba.Branchid = br.id";
 
         public static readonly string BatchAssignmentFetch = @"SELECT * from Batchassignments where CourseId = {0} AND BatchId = {1} AND BranchId={2}";
+
+        public static readonly string GetUnpaidStudents = @"Select DISTINCT s.StudentName, s.Id from studentassignments sa 
+                                                            INNER JOIN students s ON s.id = sa.studentid
+                                                            where sa.ReceiptId IS null";
     }
 }
