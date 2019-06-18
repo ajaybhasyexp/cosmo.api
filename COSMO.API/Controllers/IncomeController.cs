@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using COSMO.API.Resources;
+﻿using COSMO.API.Resources;
 using COSMO.Business.Abstractions;
-using COSMO.Models.Exceptions;
 using COSMO.Models.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace COSMO.API.Controllers
 {

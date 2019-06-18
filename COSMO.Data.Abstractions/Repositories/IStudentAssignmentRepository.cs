@@ -1,4 +1,5 @@
 ﻿using COSMO.Models.Models;
+using COSMO.Models.ViewModel;
 using System.Collections.Generic;
 
 namespace COSMO.Data.Abstractions.Repositories
@@ -8,9 +9,10 @@ namespace COSMO.Data.Abstractions.Repositories
         List<StudentAssignment> GetAllVM(int branchId);
 
         /// <summary>
-        /// Gets the list of students whose fees hasnt been paid.
+        /// Gets a list of un paid students.
         /// </summary>
-        /// <returns>A list of Student objects that has the fees yet to pay.</returns>
-        List<Student> GetUnpaidStudents();
+        /// <param name="branchId"></param>
+        /// <returns></returns>
+        List<StudentCourse> GetUnpaidStudents(int branchId);
     }
 }

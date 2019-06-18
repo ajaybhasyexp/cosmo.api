@@ -1,5 +1,6 @@
 ﻿using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
+using COSMO.Models.ViewModel;
 using Dapper;
 using Dapper.Contrib.Extensions;
 using Microsoft.Extensions.Configuration;
@@ -47,11 +48,12 @@ namespace COSMO.Data.Repositories
         /// Gets the list of students whose fees hasnt been paid.
         /// </summary>
         /// <returns>A list of Student objects that has the fees yet to pay.</returns>
-        public List<Student> GetUnpaidStudents()
+        public List<StudentCourse> GetUnpaidStudents(int branchId)
         {
             using (IDbConnection conn = Connection)
             {
-                return conn.Query<Student>(Queries.GetUnpaidStudents).ToList();
+                return conn.Query<StudentCourse>("getunpaidstudents", new { branchid = branchId },
+                commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
