@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using COSMO.API.Resources;
+﻿using COSMO.API.Resources;
 using COSMO.Business.Abstractions;
 using COSMO.Models.Models;
 using COSMO.Models.ViewModel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace COSMO.API.Controllers
 {
@@ -40,7 +38,7 @@ namespace COSMO.API.Controllers
         }
 
         [HttpGet]
-        [Route("{branchId}/unpaidstudents")]
+        [Route("{branchId}")]
         public ResponseDto<List<StudentAssignment>> GetAll([FromRoute] int branchId)
         {
             ResponseDto<List<StudentAssignment>> response = new ResponseDto<List<StudentAssignment>>(_commonResource);
@@ -57,7 +55,7 @@ namespace COSMO.API.Controllers
         }
 
         [HttpGet]
-        [Route("{branchId}")]
+        [Route("{branchId}/unpaid")]
         public ResponseDto<List<StudentCourse>> GetUnpaid([FromRoute]int branchId)
         {
             ResponseDto<List<StudentCourse>> response = new ResponseDto<List<StudentCourse>>(_commonResource);

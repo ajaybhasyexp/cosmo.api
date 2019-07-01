@@ -1,6 +1,7 @@
 ﻿using COSMO.Models.Models;
 using COSMO.Models.ViewModel;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace COSMO.Business.Abstractions
 {

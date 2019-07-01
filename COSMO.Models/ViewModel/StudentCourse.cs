@@ -11,5 +11,7 @@
         public string CourseName { get; set; }
 
         public int CourseId { get; set; }
+
+        public decimal Amount { get; set; }
     }
 }

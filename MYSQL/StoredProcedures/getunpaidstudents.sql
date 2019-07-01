@@ -18,6 +18,7 @@ BEGIN
 			,s.id AS StudentId
 			,c.CourseName
 			,c.Id AS CourseId
+			,cf.Amount
 		FROM studentassignments sa
 		INNER JOIN Students S ON sa.studentid = s.id
 		INNER JOIN coursefees cf ON cf.id = sa.coursefeeid
@@ -30,6 +31,7 @@ BEGIN
 			,s.id AS StudentId
 			,c.CourseName
 			,c.Id AS CourseId
+			,cf.Amount
 		FROM studentassignments sa
 		INNER JOIN Students S ON sa.studentid = s.id
 		INNER JOIN coursefees cf ON cf.id = sa.coursefeeid

@@ -14,7 +14,7 @@ namespace COSMO.Models.Models
 
         public string Gender { get; set; }
 
-        public int BranchId { get; set; }        
+        public int BranchId { get; set; }
 
         public int? QualificationId { get; set; }
 
@@ -32,5 +32,6 @@ namespace COSMO.Models.Models
         public string SourceName { get; set; }
 
         public bool FeesPaid { get; set; }
+
     }
 }
