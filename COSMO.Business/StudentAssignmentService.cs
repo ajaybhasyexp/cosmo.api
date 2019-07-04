@@ -3,7 +3,6 @@ using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
 using COSMO.Models.ViewModel;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace COSMO.Business
 {
@@ -48,6 +47,11 @@ namespace COSMO.Business
         public void Delete(StudentAssignment assign)
         {
             _studentAssignmentRepository.Delete(assign);
+        }
+
+        public void PayFees(FeePayment feePayment)
+        {
+            
         }
     }
 }

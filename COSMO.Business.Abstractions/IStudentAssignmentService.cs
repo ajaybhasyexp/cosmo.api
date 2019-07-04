@@ -1,7 +1,6 @@
 ﻿using COSMO.Models.Models;
 using COSMO.Models.ViewModel;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace COSMO.Business.Abstractions
 {
@@ -18,5 +17,7 @@ namespace COSMO.Business.Abstractions
         List<StudentAssignment> GetAllVM(int branchId);
 
         void Delete(StudentAssignment assign);
+
+        void PayFees(FeePayment feePayment);
     }
 }

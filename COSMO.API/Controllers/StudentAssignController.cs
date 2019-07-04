@@ -5,7 +5,6 @@ using COSMO.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace COSMO.API.Controllers
 {
@@ -63,6 +62,19 @@ namespace COSMO.API.Controllers
             {
                 response.Data = _studentAssignmentService.GetUnpaidStudents(branchId);
                 return response;
+            }
+            catch (Exception ex)
+            {
+                return response.HandleException(response);
+            }
+        }
+
+        public ResponseDto<bool> PayFees(FeePayment feePayment)
+        {
+            ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
+            try
+            {
+                return null;
             }
             catch (Exception ex)
             {
