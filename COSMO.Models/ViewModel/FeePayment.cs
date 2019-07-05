@@ -11,6 +11,8 @@
         public string Reference { get; set; }
 
         public int PaymentModeId { get; set; }
-        
+
+        public int StudentAssignmentId { get; set; }
+
     }
 }

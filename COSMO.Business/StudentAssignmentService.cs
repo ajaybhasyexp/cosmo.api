@@ -30,8 +30,6 @@ namespace COSMO.Business
         public List<StudentCourse> GetUnpaidStudents(int branchId)
         {
             return _studentAssignmentRepository.GetUnpaidStudents(branchId);
-            //return students.GroupBy(p => new { p.StudentId, p.StudentName })
-            //    .Select(p => new UnpaidStudents() { Courses = p.ToList(), Student = p.Key }).ToList();
         }
 
         public List<StudentAssignment> GetAllVM(int branchId)

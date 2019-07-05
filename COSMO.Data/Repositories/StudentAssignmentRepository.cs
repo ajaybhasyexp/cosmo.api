@@ -85,7 +85,7 @@ namespace COSMO.Data.Repositories
 
                 return studentAssignment;
             }
-        }
+        }       
 
     }
 }
