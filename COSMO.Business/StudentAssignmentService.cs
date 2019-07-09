@@ -2,6 +2,7 @@
 using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
 using COSMO.Models.ViewModel;
+using System;
 using System.Collections.Generic;
 
 namespace COSMO.Business
@@ -15,11 +16,14 @@ namespace COSMO.Business
         /// </summary>
         public IStudentAssignmentRepository _studentAssignmentRepository { get; set; }
 
+        public IRecieptRepository _recieptRepository { get; set; }
+
         #endregion
 
-        public StudentAssignmentService(IStudentAssignmentRepository studentAssignmentRepository)
+        public StudentAssignmentService(IStudentAssignmentRepository studentAssignmentRepository, IRecieptRepository recieptRepository)
         {
             _studentAssignmentRepository = studentAssignmentRepository;
+            _recieptRepository = recieptRepository;
 
         }
 
@@ -47,9 +51,25 @@ namespace COSMO.Business
             _studentAssignmentRepository.Delete(assign);
         }
 
-        public void PayFees(FeePayment feePayment)
+        public void PayFees(FeePayment feePayment, int branchId)
         {
-            
+            var receipt = new Receipt()
+            {
+                AmountPaid = feePayment.Amount,
+                BranchId = branchId,
+                CreatedBy = feePayment.UserId,
+                UpdatedBy = feePayment.UserId,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
+                PaymentMethodId = feePayment.PaymentModeId,
+                ReceiptDate = feePayment.ReceiptDate,
+                Reference = feePayment.Reference
+            };
+            receipt = _recieptRepository.Save(receipt);
+            var studentAssign = _studentAssignmentRepository.Get(feePayment.StudentAssignmentId);
+            studentAssign.ReceiptId = receipt.Id;
+            _studentAssignmentRepository.Save(studentAssign);
+
         }
     }
 }

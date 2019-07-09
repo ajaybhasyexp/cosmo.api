@@ -44,6 +44,7 @@ namespace COSMO.API
             services.AddTransient<IExpenseHeadRepository, ExpenseHeadRepository>();
             services.AddTransient<IIncomeRepository, IncomeRepository>();
             services.AddTransient<IExpenseRepository, ExpenseRepository>();
+            services.AddTransient<IRecieptRepository, ReceiptRepository>();
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBranchService, BranchService>();

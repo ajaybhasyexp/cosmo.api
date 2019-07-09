@@ -69,18 +69,20 @@ namespace COSMO.API.Controllers
             }
         }
 
-        public ResponseDto<bool> PayFees(FeePayment feePayment)
-        {
-            ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
-            try
-            {
-                return null;
-            }
-            catch (Exception ex)
-            {
-                return response.HandleException(response);
-            }
-        }
+        //[HttpPost]
+        //[Route("{branchId}/pay")]
+        //public ResponseDto<bool> PayFees(FeePayment feePayment, [FromRoute]int branchId)
+        //{
+        //    ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
+        //    try
+        //    {
+        //        return null;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return response.HandleException(response);
+        //    }
+        //}
 
         /// <summary>
         /// The save/update method for branch

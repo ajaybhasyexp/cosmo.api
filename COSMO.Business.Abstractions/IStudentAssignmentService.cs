@@ -18,6 +18,6 @@ namespace COSMO.Business.Abstractions
 
         void Delete(StudentAssignment assign);
 
-        void PayFees(FeePayment feePayment);
+        void PayFees(FeePayment feePayment, int branchId);
     }
 }

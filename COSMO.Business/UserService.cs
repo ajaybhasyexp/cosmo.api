@@ -84,42 +84,27 @@ namespace COSMO.Business
         /// </summary>
         /// <param name="id">The user identifier.</param>
         /// <returns>A user entity.</returns>
-        public User Get(int id)
-        {
-            return _userRepository.Get(id);
-        }
+        public User Get(int id) => _userRepository.Get(id);
 
         /// <summary>
         /// Gets all the users.
         /// </summary>
         /// <returns>A list of users.</returns>
-        public List<User> GetAll()
-        {
-            return _userRepository.GetAll();
-        }
+        public List<User> GetAll() => _userRepository.GetAll();
 
-        public List<User> GetAll(int branchId)
-        {
-            return _userRepository.GetAll(branchId);
-        }
+        public List<User> GetAll(int branchId) => _userRepository.GetAll(branchId);
 
         /// <summary>
         /// Saves the user entity.
         /// </summary>
         /// <param name="user">The entity to save or update.</param>
         /// <returns>the saved entity.</returns>
-        public User Save(User user)
-        {
-            return _userRepository.Save(user);
-        }
+        public User Save(User user) => _userRepository.Save(user);
 
         /// <summary>
         /// Deletes the user entity.
         /// </summary>
         /// <param name="user">The user entity to delete.</param>
-        public void Delete(User user)
-        {
-            _userRepository.Delete(user);
-        }        
+        public void Delete(User user) => _userRepository.Delete(user);
     }
 }

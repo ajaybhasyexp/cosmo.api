@@ -1,4 +1,6 @@
-﻿namespace COSMO.Models.ViewModel
+﻿using System;
+
+namespace COSMO.Models.ViewModel
 {
     public class FeePayment
     {
@@ -13,6 +15,10 @@
         public int PaymentModeId { get; set; }
 
         public int StudentAssignmentId { get; set; }
+
+        public int UserId { get; set; }
+
+        public DateTime ReceiptDate { get; set; }
 
     }
 }
