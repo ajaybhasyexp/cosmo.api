@@ -18,6 +18,11 @@ namespace COSMO.Business.Abstractions
 
         void Delete(StudentAssignment assign);
 
+        /// <summary>
+        /// Pay Fees Action 
+        /// </summary>
+        /// <param name="feePayment">The fee payment object.</param>
+        /// <param name="branchId">The branch Identifier.</param>
         void PayFees(FeePayment feePayment, int branchId);
     }
 }

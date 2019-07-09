@@ -1,9 +1,6 @@
 ﻿using COSMO.Data.Abstractions.Repositories;
 using COSMO.Models.Models;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace COSMO.Data.Repositories
 {
