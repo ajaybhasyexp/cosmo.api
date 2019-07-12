@@ -71,13 +71,12 @@ namespace COSMO.API.Controllers
 
         [HttpPost]
         [Route("{branchId}/pay")]
-        public ResponseDto<bool> PayFees(FeePayment feePayment, [FromRoute]int branchId)
+        public ResponseDto<int> PayFees(FeePayment feePayment, [FromRoute]int branchId)
         {
-            ResponseDto<bool> response = new ResponseDto<bool>(_commonResource);
+            ResponseDto<int> response = new ResponseDto<int>(_commonResource);
             try
             {
-                _studentAssignmentService.PayFees(feePayment, branchId);
-                response.Data = true;
+                response.Data = _studentAssignmentService.PayFees(feePayment, branchId); ;
                 return response;
             }
             catch (Exception ex)

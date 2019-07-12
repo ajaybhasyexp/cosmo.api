@@ -51,7 +51,7 @@ namespace COSMO.Business
             _studentAssignmentRepository.Delete(assign);
         }
 
-        public void PayFees(FeePayment feePayment, int branchId)
+        public int PayFees(FeePayment feePayment, int branchId)
         {
             var receipt = new Receipt()
             {
@@ -69,6 +69,7 @@ namespace COSMO.Business
             var studentAssign = _studentAssignmentRepository.Get(feePayment.StudentAssignmentId);
             studentAssign.ReceiptId = receipt.Id;
             _studentAssignmentRepository.Save(studentAssign);
+            return receipt.Id;
 
         }
     }
